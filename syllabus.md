@@ -20,7 +20,10 @@
     * Defensiveness, Assertions; Array basics
     * Reading:
         - Eloquent JS Chapter 3-4
-    * [Homework 1]()--*Note: Homework link will be provided after class on this day*
+    * [Homework 1](https://github.com/portlandcodeschool/jsn-sum14-1) 
+        - Copy and paste or download these files from Github.
+        - If you don't have a Github account, please create one.   
+    * Extra/ Bonus: If you want to or need to, [Treehouse has a Javascript Foundations course](http://teamtreehouse.com/library/javascript-foundations) that you can try. This might be helpful if you are finding some concepts difficult and need another explanation. Please devote the bulk of your time to homework and reading. 
 
 ###Week 2: *May 19-25*
 + **Monday 6-9 PM**
@@ -30,12 +33,15 @@
     * Pseudo-arrays; Arrays as Objects; Array Methods
         * String methods; String wrapper objects; Custom methods
     * Reading: 
+        - Review Eloquent Javascript Chapter 4, or read it if you haven't yet
+        - Javascript, the Definitive Guide, chapter 6 
 + **Wednesday 6-9 PM**
     * Topics: 
     * Functions as Objects; Functions as Arguments, Callbacks;
         * Parentheses types; Self-Executing Anonymous Functions;
     * git workflow, branching, & assignments;
-    * Reading:
+    * Reading: 
+        - [Mozilla Developer Network: Javascript Guide: Working with Objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects)
     * [Homework 2]()--*Note: Homework link will be provided after class on this day*
 
 ###Week 3: *May 26-June 1*
