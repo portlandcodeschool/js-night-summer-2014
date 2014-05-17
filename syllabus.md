@@ -43,7 +43,12 @@
     * Reading: 
         - [Mozilla Developer Network: Javascript Guide: Working with Objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects)
     * [Homework 2]()--*Note: Homework link will be provided after class on this day*
-
+    * [Git Slideshow](https://docs.google.com/presentation/d/1pBNP5IwgnsVUTYius0vYQdo19ObHvQ1PZpqHmmGw2YI/pub?start=false&loop=false&delayms=60000)
+        - This slideshow is mainly for those of you who have never set up or up git before. If git is already set up on your machine, please ignore the setup part of the slideshow. Everyone should refer to the "workflow" part of the slideshow to help them publish their JS homework to their own Github account starting this week.
+    * Git Resources: 
+        - [Try Git](https://try.github.io/levels/1/challenges/1)
+        - [Treehouse: Git Basics](http://teamtreehouse.com/library/git-basics)
+        - ["Learn Version Control With Git"- Online Ebook](http://www.git-tower.com/learn/ebook/command-line/introduction)
 ###Week 3: *May 26-June 1*
 + **Monday 6-9 PM**
     * Memorial Day Observed; no class.
