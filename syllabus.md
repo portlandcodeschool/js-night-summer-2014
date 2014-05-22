@@ -42,7 +42,7 @@
     * git workflow, branching, & assignments;
     * Reading: 
         - [Mozilla Developer Network: Javascript Guide: Working with Objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects)
-    * [Homework 2]()--*Note: Homework link will be provided after class on this day*
+    * [Homework 2](https://github.com/portlandcodeschool/jsn-sum14-2)
     * [Git Slideshow](https://docs.google.com/presentation/d/1pBNP5IwgnsVUTYius0vYQdo19ObHvQ1PZpqHmmGw2YI/pub?start=false&loop=false&delayms=60000)
         - This slideshow is mainly for those of you who have never set up or up git before. If git is already set up on your machine, please ignore the setup part of the slideshow. Everyone should refer to the "workflow" part of the slideshow to help them publish their JS homework to their own Github account starting this week.
     * Git Resources: 
