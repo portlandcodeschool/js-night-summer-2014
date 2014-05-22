@@ -1,0 +1,115 @@
+< var test = {'a':'apple'}
+> undefined
+< test
+> {a: "apple"}
+< var test = {'  ':'apple'}
+> undefined
+< test
+> {  : "apple"}
+< var test = { :'apple'}
+> SyntaxError: invalid property id
+< var obj = {a:'a'};
+> undefined
+< obj
+> {a: "a"}
+< obj === obj
+> true
+< var obj = {}
+> undefined
+< obj[0] = 'a'
+> "a"
+< obj[1] = 'b'
+> "b"
+< obj[2]='c'
+> "c"
+< obj[1]
+> "b"
+< obj.length = 3;
+> 3
+< for (var i=0; i<obj.length; i++) {console.log(obj[i]);}
+> undefined
+| "a"
+| "b"
+| "c"
+< obj
+> {0: "a", 1: "b", 2: "c", length: 3}
+< obj[4]='d'
+> "d"
+< obj
+> {0: "a", 1: "b", 2: "c", 4: "d", length: 3}
+< var arr = [0,1,2]
+> undefined
+< arr.length
+> 3
+< arr[9]=9
+> 9
+< arr.length
+> 10
+< arr
+> [0, 1, 2, ,,,,,, 9]
+< arr[7]
+> undefined
+< arr.length = 2
+> 2
+< arr
+> [0, 1]
+< arr[2]
+> undefined
+< obj
+> {0: "a", 1: "b", 2: "c", 4: "d", length: 3}
+< obj.length = 2
+> 2
+< obj
+> {0: "a", 1: "b", 2: "c", 4: "d", length: 2}
+< arr.flavor = 'banana'
+> "banana"
+< obj.color = 'red'
+> "red"
+< obj
+> {0: "a", 1: "b", 2: "c", 4: "d", length: 2, color: "red"}
+< arr.join()
+> "0,1,2,3,4,5,6"
+< arr.join('  ')
+> "0  1  2  3  4  5  6"
+< arr
+> [0, 1, 2, 3, 4, 5, 6]
+< var str = arr.join(';')
+> undefined
+< str
+> "0;1;2;3;4;5;6"
+< arr.pop()
+> 6
+< arr
+> [0, 1, 2, 3, 4, 5]
+< arr.push(6)
+> 7
+< arr
+> [0, 1, 2, 3, 4, 5, 6]
+< arr.push(7)
+> 8
+< arr
+> [0, 1, 2, 3, 4, 5, 6, 7]
+< arr.push(7)+1
+> 10
+< arr.push(Infinity+1)
+> 10
+< arr
+> [0, 1, 2, 3, 4, 5, 6, 7, 7, Infinity]
+< arr.push()
+> 10
+< arr
+> [0, 1, 2, 3, 4, 5, 6, 7, 7, Infinity]
+< Math.sqrt(4)
+> 2
+< Math.floor(1.1)
+> 1
+< "apple"[2]
+> "p"
+< "apple"[2]='r'
+> "r"
+< var fruit = 'apple'
+> undefined
+< fruit[2]='r'
+> "r"
+< fruit
+> "apple"
