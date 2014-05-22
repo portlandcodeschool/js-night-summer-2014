@@ -1,0 +1,144 @@
+< (if (true) 1)
+> SyntaxError: syntax error
+< if (true) 1;
+> 1
+< true? 'a':'b'
+> "a"
+< (true? 'a':'b')
+> "a"
+< ((((true? 'a':'b'))))
+> "a"
+< var x =(true? 'a':'b')
+> undefined
+< x
+> "a"
+< ((false?1:0)? 'a':'b')
+> "b"
+< function plus(a,b) { return a+b;}
+> undefined
+< plus
+> function plus()
+< plus(1,3)
+> 4
+< (1+plus(1,3))
+> 5
+< function plus(a,b) { a+b;}
+> undefined
+< plus(1,3)
+> undefined
+< function plus(a,b) { return;}
+> undefined
+< plus(1,3)
+> undefined
+< function aOrB(cond) {if (cond) return 'a'; return 'b';}
+> undefined
+< aOrB(true)
+> "a"
+< aOrB(false)
+> "b"
+< 1.1 % 1
+> 0.10000000000000009
+"pass #0" Scratchpad/3:123
+"pass #1" Scratchpad/3:123
+"pass #2" Scratchpad/3:123
+"pass #3" Scratchpad/3:123
+"pass #4" Scratchpad/3:123
+"Freak out: who isnt a string" Scratchpad/3:3
+< var duck = new Object();
+ duck.noise = 'quack';
+ duck.feet = 2;
+ duck.canSwim = true;
+ duck
+> {noise: "quack", feet: 2, canSwim: true}
+< typeof duck
+> "object"
+<  var duck2 = {noise:'quACKK!', feet:2, canSwim:"sometimes"}
+> undefined
+< duck
+> {noise: "quack", feet: 2, canSwim: true}
+< duck2
+> {noise: "quACKK!", feet: 2, canSwim: "sometimes"}
+< typeof duck2
+> "object"
+< duck['feet']
+> 2
+< duck2['noise']
+> "quACKK!"
+< duck.noise
+> "quack"
+< duck2.noise
+> "quACKK!"
+< var key = 'feet'
+> undefined
+< duck[key]
+> 2
+< duck['fe'+'et']
+> 2
+< Math.sqrt()
+> NaN
+< Math.sqrt(9)
+> 3
+< var arr=[1,2,3]
+> undefined
+< arr.length
+> 3
+< var ducks = {duck1:duck, duck2:duck2}
+> undefined
+< var moreducks = {duck1:{noise:'quack',feet:2}, duck2:duck2}
+> undefined
+< more
+> ReferenceError: more is not defined
+< moreducks
+> {duck1: Object, duck2: Object}
+< var moreducks = {duck1:{noise:'quack',feet:(1+1)}, duck2:duck2}
+> undefined
+< moreducks
+> {duck1: Object, duck2: Object}
+< var me = {}
+> undefined
+< me.mypet = {name:'spot', color:'brown'}
+> {name: "spot", color: "brown"}
+< duck1
+> ReferenceError: duck1 is not defined
+< duck
+> {noise: "quack", feet: 2, canSwim: true}
+< delete duck.feet
+> true
+< duck
+> {noise: "quack", canSwim: true}
+< kellen['myCar']['color']
+> ReferenceError: kellen is not defined
+< moreducks.duck1.noise
+> "quack"
+< moreducks['duck1'].noise
+> "quack"
+< ducks
+> {duck1: Object, duck2: Object}
+< var whichduck=1
+> undefined
+< ducks[whichduck].noise
+> TypeError: ducks[whichduck] is undefined
+< ducks["duck"+whichduck].noise
+> "quack"
+< ducks['duck'+whichduck]['noise']
+> "quack"
+< ducks.duck2['noise']
+> "quACKK!"
+< ducks.duck1
+> {noise: "quack", canSwim: true}
+< ('duck1' in ducks)
+> true
+< ('duck3' in ducks)
+> false
+< 'a' in {a:1, b:2}
+> true
+< 'noise' in ducks.duck1
+> true
+< 'noise' in ducks['duck1']
+> true
+"duck1" Scratchpad/4:3
+"duck2" Scratchpad/4:3
+{noise: "quack"} Scratchpad/4:3
+{noise: "QWEASD"} Scratchpad/4:3
+"quack" Scratchpad/4:3
+"QWEASD" Scratchpad/4:3
