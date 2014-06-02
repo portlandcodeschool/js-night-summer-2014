@@ -1,0 +1,63 @@
+< var obj = new Object();
+> undefined
+< obj
+> [object Object]
+< obj.prop = 'something'
+> "something"
+< obj
+> {prop: "something"}
+< obj.'1'
+> SyntaxError: missing name after . operator
+< obj[1] = 'a'
+> "a"
+< obj
+> {1: "a", prop: "something"}
+< obj[1]
+> "a"
+< var arr = new Array();
+> undefined
+< arr[1] = 'a'
+> "a"
+< arr
+> [, "a"]
+< arr[7] = 'a'
+> "a"
+< arr
+> [, "a", ,,,,, "a"]
+< arr.foobar = 'spiffy'
+> "spiffy"
+< arr
+> [, "a", ,,,,, "a"]
+< arr.foobar
+> "spiffy"
+< for (var prop in arr) console.log(prop);
+> undefined
+| "1"
+| "7"
+| "foobar"
+< arr.length
+> 8
+< typeof arr.length
+> "number"
+< 'length' in arr
+> true
+< arr.length = 10
+> 10
+< arr
+> [, "a", ,,,,, "a", ,,]
+< typeof arr.length
+> "number"
+< arr.length
+> 10
+< arr
+> [, "a", ,,,,, "a", ,,]
+< [1,2,3].push(4)
+> 4
+< arr.push(4)
+> 11
+< arr
+> [, "a", ,,,,, "a", ,, 1 more…]
+< obj
+> {1: "a", prop: "something"}
+< obj+1
+> "[object Object]1"
