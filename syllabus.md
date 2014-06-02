@@ -63,8 +63,11 @@
         * Factory Functions; Duplicate vs. Shared Methods
     * Reading:
         - Eloquent Javascript, Chapters 6 & 8
-        - JS, Definitive Guide, sections 6.1.1, 6.1.2, 6.2.1 and also
-            + pp. 781-783 (Entry on the Global object)
+        - JS, Definitive Guide:
+            + section 6.1.1: Object Literals
+            + section 6.1.2: Creating Objects with "new"
+            + section 6.2.1: Objects as Associative Arrays
+            + pp. 781-783: the Global object
     * Reading in General: Continue to use the Mozilla Developer network site and Javascript the Definitive Guide as a reference. Any topic we cover in class can be referenced in one of these two tools. If you can't find the relevent article, please ask for assistance. 
     * [Git Slideshow # 2](https://docs.google.com/presentation/d/1p4kcnwTh0a26-jnGiweFebrFkpDQsLAXVRIkjKjkblg/pub?start=false&loop=false&delayms=3000)
 
