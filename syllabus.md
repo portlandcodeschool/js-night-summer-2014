@@ -1,9 +1,9 @@
 ###Week 1: *May 12-18*
 + **Monday 6-9 PM**
     * Topics: 
-    * JS Console; Expressions, Operators;
-    * Variables, Assignment, Scope;
-    * Primitive types; String concatenation; Auto-conversion
+        * JS Console; Expressions, Operators;
+        * Variables, Assignment, Scope;
+        * Primitive types; String concatenation; Auto-conversion
     * Reading:
        - [Eloquent JS Chapter 1: Introduction](http://eloquentjavascript.net/contents.html)
        - [Eloquent JS Chapter 2: Basic JavaScript: values, variables, and control flow](http://eloquentjavascript.net/chapter2.html)
@@ -14,10 +14,10 @@
         + In general, catch up on Javascript concepts you don't understand. Try to get comfortable with the console (again, see the Treehouse course). 
 + **Wednesday 6-9 PM**
     * Topics: 
-    * Conditionals & Branching; Truthiness; Boolean Ops;
-    * ScratchPad; Blocks; Loops (_while_,_for_); _console.log_;
-    * Function basics: parameters, return values, definition vs. call;
-    * Defensiveness, Assertions; Array basics
+        * Array basics, indexing
+        * Conditionals & Branching; Truthiness; Boolean/Branching Operators (_&&_, _||_);
+        * ScratchPad; Blocks; Loops (_while_,_for_); _console.log_;
+        * Function basics: parameters, return values, definition vs. call;
     * Reading:
         - Eloquent JS Chapter 3-4
     * [Homework 1](https://github.com/portlandcodeschool/jsn-sum14-1) 
@@ -28,18 +28,21 @@
 ###Week 2: *May 19-25*
 + **Monday 6-9 PM**
     * Topics: 
-    * Objects: Properties, Membership Operators, Chaining, Nesting;
-        * References; Object linking and sharing; Garbage Collection
-    * Pseudo-arrays; Arrays as Objects; Array Methods
-        * String methods; String wrapper objects; Custom methods
+        * Review: Functions, Ternary Conditional Operator
+        * Defensive Programming; Basic Testing with Assertions
+        * Objects: incremental creation, literal notation, nesting; Properties, membership operators (_[]_ and _._), chaining;
+        * Property creation, deletion, enumeration (_in_ operator, _for...in_ loops); Properties vs. Variables
     * Reading: 
         - Review Eloquent Javascript Chapter 4, or read it if you haven't yet
         - Javascript, the Definitive Guide, chapter 6 
 + **Wednesday 6-9 PM**
-    * Topics: 
-    * Functions as Objects; Functions as Arguments, Callbacks;
-        * Parentheses types; Self-Executing Anonymous Functions;
-    * git workflow, branching, & assignments;
+    * Topics:
+        * Review: Object creation, membership operators
+        * References; Object linking and sharing, shallow copy and compare, _null_, reference arguments
+        * Pseudo-arrays; Arrays as Objects; Built-in Array methods
+        <!--Delayed:  String methods; String wrapper objects;-->
+        * Custom methods, _this_ keyword; Toolbox pattern, examples; 3 roles of objects
+        * git workflow, branching, & assignments;
     * Reading: 
         - [Mozilla Developer Network: Javascript Guide: Working with Objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects)
     * [Homework 2](https://github.com/portlandcodeschool/jsn-sum14-2)
@@ -54,8 +57,9 @@
     * Memorial Day Observed; no class.
 + **Wednesday 6-9 PM**
     * Topics:
-    * Function details: Evaluation Phases, Call Objects, Arguments Object
-        * Call Chain, Scopes, Closures; _this_
+        * Functions as Objects; Functions as Arguments, Callbacks;
+        * Call operator, parentheses types; Self-Executing Anonymous Functions;    
+        * Function details: Evaluation Phases, Call Objects, Arguments Object; Call Chain, Scopes, Closures; _this_
         * Global Object; Global variables vs. properties
 + **Saturday 5/31, 9 AM - 4 PM**
     * Topics:

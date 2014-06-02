@@ -1,0 +1,75 @@
+this
+Window → about:blank
+this === window
+true
+this === this.window
+true
+var foo;
+undefined
+delete foo
+true
+foo
+ReferenceError: foo is not defined
+2 Scratchpad/1:3
+4 Scratchpad/1:3
+6 Scratchpad/1:3
+8 Scratchpad/1:3
+10 Scratchpad/1:3
+2 Scratchpad/1:3
+4 Scratchpad/1:3
+6 Scratchpad/1:3
+8 Scratchpad/1:3
+10 Scratchpad/1:3
+2 0 Scratchpad/1:3
+4 1 Scratchpad/1:3
+6 2 Scratchpad/1:3
+8 3 Scratchpad/1:3
+10 4 Scratchpad/1:3
+var onj7 = Object(7);
+undefined
+typeof onj7
+"object"
+onj7.valueOf()
+7
+7 == onj7
+true
+7 === onj7
+false
+onj7+3
+10
+var car = {wheels:4}
+undefined
+car.valueOf = function() {return this.wheels;}
+function car.valueOf()
+car+5
+9
+{wheels:4}+5
+5
+var truck = {wheels:4}
+undefined
+truck+5
+"[object Object]5"
+car.toString = function() {return "car";}
+function car.toString()
+var
+SyntaxError: missing variable name
+car
+{wheels: 4, valueOf: car.valueOf(), toString: car.toString()}
+String(car)
+"car"
+car+4
+8
+car+'4'
+"44"
+morenums
+[96, 480, 384, 288, 192]
+morenums.sort()
+[192, 288, 384, 480, 96]
+{area: cubeKit.area(), paint: cubeKit.paint(), makeCube: cubeKit.makeCube()} Scratchpad/4:9
+{size: 1, color: "red", area: cubeKit.area(), paint: cubeKit.paint()} Scratchpad/4:9
+cubes
+[Object, Object, Object, Object]
+cubes
+[Object, Object, Object, Object]
+makeCube.area()
+NaN
