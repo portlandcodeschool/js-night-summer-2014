@@ -81,7 +81,8 @@
         + Constructors, _new_; Wrapper Objects and Converters; Class Methods
         + Prototypes, Instance Method Inheritance; Subclassing
     * Reading: 
-        - JS, Definitive Guide, sections 6.2.2
+        - JS, Definitive Guide:
+            + section 6.2.2: inheritance 
 + **Wednesday 6-9 PM**
     * Topics:
         + Core JS Overflow, Recap, Practice;
