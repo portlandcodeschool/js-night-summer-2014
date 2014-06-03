@@ -85,6 +85,10 @@
             + Section 3.10: Variable Scope
             + Section 8.5: Functions as Namespaces
             + Section 8.6: Closures
+            + Section 8.8.1: Processing Arrays with Functions
+            + Section 8.8.2: Higher-Order Functions 
+                * Explanation: Higher-Oder functions are functions that either take in a function as a parameter, OR return a function, OR both. 
+        - Review Eloquent JS, chapter 6: Functional Programming
         - [Understand JavaScript Callback Functions and Use Them](http://javascriptissexy.com/understand-javascript-callback-functions-and-use-them/)
 + **Wednesday 6-9 PM**
     * Topics:
@@ -95,6 +99,7 @@
             + section 6.1.2: Creating Objects with "new"
             + section 9.1: Classes and Prototypes
             + section 9.2: Classes and Constructors
+        - Review Eloquent JS, chapter 8
 
 ###Week 5: *June 9-15*
 + **Monday 6-9 PM**
