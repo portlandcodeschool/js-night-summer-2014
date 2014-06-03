@@ -85,6 +85,7 @@
             + Section 3.10: Variable Scope
             + Section 8.5: Functions as Namespaces
             + Section 8.6: Closures
+        - [Understand JavaScript Callback Functions and Use Them](http://javascriptissexy.com/understand-javascript-callback-functions-and-use-them/)
 + **Wednesday 6-9 PM**
     * Topics:
         + Constructors, _new_; Wrapper Objects and Converters; 
