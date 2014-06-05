@@ -73,7 +73,6 @@
             + section 6.2.1: Objects as Associative Arrays
             + pp. 781-783: the Global object
     * Reading in General: Continue to use the Mozilla Developer network site and Javascript the Definitive Guide as a reference. Any topic we cover in class can be referenced in one of these two tools. If you can't find the relevent article, please ask for assistance. 
-    * [Git Slideshow # 2](https://docs.google.com/presentation/d/1p4kcnwTh0a26-jnGiweFebrFkpDQsLAXVRIkjKjkblg/pub?start=false&loop=false&delayms=3000)
     * [Homework 3](https://github.com/portlandcodeschool/jsn-sum14-3)
 
 ###Week 4: *June 2-8*
@@ -100,6 +99,7 @@
             + section 9.1: Classes and Prototypes
             + section 9.2: Classes and Constructors
         - Review Eloquent JS, chapter 8
+    * [Git Slideshow # 2](https://docs.google.com/presentation/d/1p4kcnwTh0a26-jnGiweFebrFkpDQsLAXVRIkjKjkblg/pub?start=false&loop=false&delayms=3000)
 
 ###Week 5: *June 9-15*
 + **Monday 6-9 PM**
@@ -111,6 +111,8 @@
     * Topics: 
         - Testing with QUnit
         - Core JS Review
+    * Reading:
+        - [Qunit's introduction to Unit testing](http://qunitjs.com/intro/)
 
 ###Week 6: *June 16-22*
 + **Monday 6-9 PM**
