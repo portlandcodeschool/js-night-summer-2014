@@ -100,6 +100,7 @@
             + section 9.2: Classes and Constructors
         - Review Eloquent JS, chapter 8
     * [Git Slideshow # 2](https://docs.google.com/presentation/d/1p4kcnwTh0a26-jnGiweFebrFkpDQsLAXVRIkjKjkblg/pub?start=false&loop=false&delayms=3000)
+    * [Homework 4](https://github.com/portlandcodeschool/jsn-sum14-4)
 
 ###Week 5: *June 9-15*
 + **Monday 6-9 PM**
@@ -109,10 +110,7 @@
 
 + **Wednesday 6-9 PM**
     * Topics: 
-        - Testing with QUnit
         - Core JS Review
-    * Reading:
-        - [Qunit's introduction to Unit testing](http://qunitjs.com/intro/)
 
 ###Week 6: *June 16-22*
 + **Monday 6-9 PM**
