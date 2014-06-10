@@ -125,7 +125,7 @@ Now let's redo this code but add a third object to the mix, the secretSetter, wh
         var obj1 = {myInc : secretInc};
         var obj2 = {myInc : secretInc};
         var secretSetter = {secretSet : secretSet};
-        return [obj1,obj2],secretSetter;
+        return [obj1,obj2,secretSetter];
     }()
     var obj1 = objects[0];
     var obj2 = objects[1];
