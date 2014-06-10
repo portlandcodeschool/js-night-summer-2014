@@ -118,13 +118,13 @@
 + **Wednesday 6-9 PM**
     * Topics: Node HTTP server, review basic node concepts, internet concepts (http, server, client)
 + **Saturday 6/21, 9 AM - 4 PM**
-    * Topics: More node HTTP server Routes, static file server
+    * Topics: More node HTTP server Routes, static file server, request module
 
 ###Week 7: *June 23-29*
 + **Monday 6-9 PM**
     * Topics: More Routes, Api routes, Test with Node Assert module
 + **Wednesday 6-9 PM**
-    * Topics: More helper modules in node (request, bl, etc), Streams in node
+    * Topics: More helper modules in node, Streams 
 
 ###Week 8: *June 30-July 6*
 + **Monday 6-9 PM**
