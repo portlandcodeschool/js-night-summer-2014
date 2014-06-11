@@ -136,5 +136,5 @@ Now let's redo this code but add a third object to the mix, the secretSetter, wh
     console.log(obj1.myInc());
     console.log(obj2.myInc());
     console.log(obj1.myInc());
-    secretSetter(10);
+    secretSetter.secretSet(10);
     console.log(obj1.myInc());
