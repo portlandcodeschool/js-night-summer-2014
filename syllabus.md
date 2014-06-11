@@ -115,8 +115,30 @@
 ###Week 6: *June 16-22*
 + **Monday 6-9 PM**
     * Topics: Node, Node modules, Node FS module
+    * Reading: 
+        - [article: Enter the World of Node.js](http://www.sitepoint.com/enter-world-node-js/)
+        - [Art of Node by Max Ogden](https://github.com/maxogden/art-of-node)
+        - [node.js api on file system, "fs"](http://nodejs.org/api/fs.html) 
+            + read approximately the first third or half of this page
+        - [node.js api entry on modules](http://nodejs.org/api/modules.html)
+        - [node.js api section on process.argv in the process entry](http://nodejs.org/api/process.html#process_process_argv)
+    * Bonus Reading About Node: 
+        - [2011 Article on the History of Node](http://www.theregister.co.uk/2011/03/01/the_rise_and_rise_of_node_dot_js/?page=1)
+    * Install before Class: 
+        1. [Node.js (includes npm: the node package manager)](http://nodejs.org/)
+            - Click the green button
+            - You may also use any of the installation instructions in the readings if you feel more comfortable with that
+
 + **Wednesday 6-9 PM**
     * Topics: Node HTTP server, review basic node concepts, internet concepts (http, server, client)
+    * Reading:
+        - [Node Docs entries on HTTP](http://nodejs.org/api/http.html)
+        - Continue reading or re-read [art-of-node](https://github.com/maxogden/art-of-node)
+
+# Reading for Homework: 
+- [node docs entry on Path](http://nodejs.org/api/path.html)
+    + pay particular attention to path.extname
+    + [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number#Example:_Using_Number_to_convert_a_Date_object)
 + **Saturday 6/21, 9 AM - 4 PM**
     * Topics: More node HTTP server Routes, static file server, request module
 
