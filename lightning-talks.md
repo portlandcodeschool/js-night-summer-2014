@@ -9,5 +9,7 @@ We will be starting lightning talks on various topics. Generally, each talk will
 
 ###Talks
 
-Monday, June 16:  What is node.js?
+Monday, June 16:  What is node.js? 
+    Presenter: 
 Wednesday, June 18: What is HTTP?
+    Presenter: 
