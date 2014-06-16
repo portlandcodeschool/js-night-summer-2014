@@ -6,6 +6,7 @@ We will be starting lightning talks on various topics. Generally, each talk will
 - 3-5 minute time limit
 - You must write code or draw an explanatory diagram on the whiteboard during your presentation
 - The talk should be as accurate as you can possibly make it. Talk about the parts of the topic that you think you understand the best. After all, it's only a minimum of three minutes.
+- New Requirement: No powerpoint slides please
 
 ###Talks
 

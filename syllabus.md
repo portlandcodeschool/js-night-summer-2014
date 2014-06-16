@@ -134,11 +134,12 @@
     * Reading:
         - [Node Docs entries on HTTP](http://nodejs.org/api/http.html)
         - Continue reading or re-read [art-of-node](https://github.com/maxogden/art-of-node)
+        - [http response codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes)
+    * Reading for Homework: 
+    - [node docs entry on Path](http://nodejs.org/api/path.html)
+        + pay particular attention to path.extname
+    - [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number#Example:_Using_Number_to_convert_a_Date_object)
 
-# Reading for Homework: 
-- [node docs entry on Path](http://nodejs.org/api/path.html)
-    + pay particular attention to path.extname
-    + [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number#Example:_Using_Number_to_convert_a_Date_object)
 + **Saturday 6/21, 9 AM - 4 PM**
     * Topics: More node HTTP server Routes, static file server, request module
 
@@ -146,17 +147,17 @@
 + **Monday 6-9 PM**
     * Topics: More Routes, Api routes, Test with Node Assert module
 + **Wednesday 6-9 PM**
-    * Topics: More helper modules in node, Streams 
+    * Topics: Express.js
 
 ###Week 8: *June 30-July 6*
 + **Monday 6-9 PM**
     * Topics: The DOM, jQuery: part 1
 + **Wednesday 6-9 PM**
-    * Topics: The concept and purpose of templates, templates with Hogan.js, jQuery: part 2
+    * Topics: Express.js, jQuery: part 2
 
 ###Week 9: *July 7-13*
 + **Monday 6-9 PM**
-    * Topics: Data Persistence: Orchestrate.io, jQuery: part 3
+    * Topics: More Exrpess, Data Persistence: Orchestrate.io, jQuery: part 3
 + **Wednesday 6-9 PM**
     * Topics: Orchestrate.io, Overflow
 
