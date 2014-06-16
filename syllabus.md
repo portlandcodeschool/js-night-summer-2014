@@ -128,6 +128,8 @@
         1. [Node.js (includes npm: the node package manager)](http://nodejs.org/)
             - Click the green button
             - You may also use any of the installation instructions in the readings if you feel more comfortable with that
+    * [Slideshow - Node.js](https://docs.google.com/presentation/d/1Jr8pbvZqWjah9xkq77lK-ejXA-vWj5kKZ3F7xMsVRJ8/pub?start=false&loop=false&delayms=60000)
+    * [Homework #6 "Preview"](https://github.com/portlandcodeschool/jsn-sum14-6)
 
 + **Wednesday 6-9 PM**
     * Topics: Node HTTP server, review basic node concepts, internet concepts (http, server, client)
@@ -139,7 +141,6 @@
     - [node docs entry on Path](http://nodejs.org/api/path.html)
         + pay particular attention to path.extname
     - [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number#Example:_Using_Number_to_convert_a_Date_object)
-
 + **Saturday 6/21, 9 AM - 4 PM**
     * Topics: More node HTTP server Routes, static file server, request module
 
