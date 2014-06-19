@@ -142,6 +142,12 @@
             + pay particular attention to path.extname
         - [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number#Example:_Using_Number_to_convert_a_Date_object)
     * [Slideshow - Node Servers (and other stuff)](https://docs.google.com/presentation/d/1oMK8m0jO_rCVLZusz7_sckjqJM3UQtzdUu8aCUKiLdY/pub?start=false&loop=false&delayms=60000)
+    * JSON Resources: 
+        - [JSON lint](http://jsonlint.com/)
+        - [JSON.org](http://json.org/)
+        - [MDN page on JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON)
+            + includes info on JSON.parse and JSON.stringify
+        - Javascript: the Definitive Guide: p. 138, section 6.9: "Serializing Objects" (serialize means to turn into a sequence of ordered characters. this is what JSON.parse does)
 + **Saturday 6/21, 9 AM - 4 PM**
     * Topics: Node HTTP server Routes, static file server, request module
     * Reading: [Node Docs entry on URL](http://nodejs.org/api/url.html)
