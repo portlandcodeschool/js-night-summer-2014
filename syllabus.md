@@ -138,11 +138,13 @@
         - Continue reading or re-read [art-of-node](https://github.com/maxogden/art-of-node)
         - [http response codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes)
     * Reading for Homework: 
-    - [node docs entry on Path](http://nodejs.org/api/path.html)
-        + pay particular attention to path.extname
-    - [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number#Example:_Using_Number_to_convert_a_Date_object)
+        - [node docs entry on Path](http://nodejs.org/api/path.html)
+            + pay particular attention to path.extname
+        - [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number#Example:_Using_Number_to_convert_a_Date_object)
+    * [Slideshow - Node Servers (and other stuff)](https://docs.google.com/presentation/d/1oMK8m0jO_rCVLZusz7_sckjqJM3UQtzdUu8aCUKiLdY/pub?start=false&loop=false&delayms=60000)
 + **Saturday 6/21, 9 AM - 4 PM**
-    * Topics: More node HTTP server Routes, static file server, request module
+    * Topics: Node HTTP server Routes, static file server, request module
+    * Reading: [Node Docs entry on URL](http://nodejs.org/api/url.html)
 
 ###Week 7: *June 23-29*
 + **Monday 6-9 PM**
