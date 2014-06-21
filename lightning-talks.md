@@ -14,3 +14,19 @@ We will be starting lightning talks on various topics. Generally, each talk will
     + Presenter: Geoff
 - Wednesday, June 18: What is HTTP?
     + Presenter: Hanna
+- Saturday, June 21: Node url module
+    + Presenter: Tom
+
+- Wednesday, June 25: Switch Statements
+    + Presenter: TBD
+
+- Monday, June 30: Exception Handling
+    + Presenter: TBD
+- Wednesday, July 2: TBD
+    + Presenter: TBD
+
+- Monday, July 7: TBD
+    + Presenter: TBD
+- Wednesday, July 9: TBD
+    + Presenter: TBD
+
