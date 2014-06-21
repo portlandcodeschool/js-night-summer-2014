@@ -115,26 +115,58 @@
 ###Week 6: *June 16-22*
 + **Monday 6-9 PM**
     * Topics: Node, Node modules, Node FS module
+    * Reading: 
+        - [article: Enter the World of Node.js](http://www.sitepoint.com/enter-world-node-js/)
+        - [Art of Node by Max Ogden](https://github.com/maxogden/art-of-node)
+        - [node.js api on file system, "fs"](http://nodejs.org/api/fs.html) 
+            + read approximately the first third or half of this page
+        - [node.js api entry on modules](http://nodejs.org/api/modules.html)
+        - [node.js api section on process.argv in the process entry](http://nodejs.org/api/process.html#process_process_argv)
+    * Bonus Reading About Node: 
+        - [2011 Article on the History of Node](http://www.theregister.co.uk/2011/03/01/the_rise_and_rise_of_node_dot_js/?page=1)
+    * Install before Class: 
+        1. [Node.js (includes npm: the node package manager)](http://nodejs.org/)
+            - Click the green button
+            - You may also use any of the installation instructions in the readings if you feel more comfortable with that
+    * [Slideshow - Node.js](https://docs.google.com/presentation/d/1Jr8pbvZqWjah9xkq77lK-ejXA-vWj5kKZ3F7xMsVRJ8/pub?start=false&loop=false&delayms=60000)
+    * [Homework #6 "Preview"](https://github.com/portlandcodeschool/jsn-sum14-6)
+
 + **Wednesday 6-9 PM**
     * Topics: Node HTTP server, review basic node concepts, internet concepts (http, server, client)
+    * Reading:
+        - [Node Docs entries on HTTP](http://nodejs.org/api/http.html)
+        - Continue reading or re-read [art-of-node](https://github.com/maxogden/art-of-node)
+        - [http response codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes)
+    * Reading for Homework: 
+        - [node docs entry on Path](http://nodejs.org/api/path.html)
+            + pay particular attention to path.extname
+        - [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number#Example:_Using_Number_to_convert_a_Date_object)
+    * [Slideshow - Node Servers (and other stuff)](https://docs.google.com/presentation/d/1oMK8m0jO_rCVLZusz7_sckjqJM3UQtzdUu8aCUKiLdY/pub?start=false&loop=false&delayms=60000)
+    * JSON Resources: 
+        - [JSON lint](http://jsonlint.com/)
+        - [JSON.org](http://json.org/)
+        - [MDN page on JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON)
+            + includes info on JSON.parse and JSON.stringify
+        - Javascript: the Definitive Guide: p. 138, section 6.9: "Serializing Objects" (serialize means to turn into a sequence of ordered characters. this is what JSON.parse does)
 + **Saturday 6/21, 9 AM - 4 PM**
-    * Topics: More node HTTP server Routes, static file server, request module
+    * Topics: Node HTTP server Routes, static file server, request module
+    * Reading: [Node Docs entry on URL](http://nodejs.org/api/url.html)
 
 ###Week 7: *June 23-29*
 + **Monday 6-9 PM**
     * Topics: More Routes, Api routes, Test with Node Assert module
 + **Wednesday 6-9 PM**
-    * Topics: More helper modules in node, Streams 
+    * Topics: Express.js
 
 ###Week 8: *June 30-July 6*
 + **Monday 6-9 PM**
     * Topics: The DOM, jQuery: part 1
 + **Wednesday 6-9 PM**
-    * Topics: The concept and purpose of templates, templates with Hogan.js, jQuery: part 2
+    * Topics: Express.js, jQuery: part 2
 
 ###Week 9: *July 7-13*
 + **Monday 6-9 PM**
-    * Topics: Data Persistence: Orchestrate.io, jQuery: part 3
+    * Topics: More Exrpess, Data Persistence: Orchestrate.io, jQuery: part 3
 + **Wednesday 6-9 PM**
     * Topics: Orchestrate.io, Overflow
 
