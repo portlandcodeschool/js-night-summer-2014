@@ -18,7 +18,7 @@ We will be starting lightning talks on various topics. Generally, each talk will
     + Presenter: Tom
 
 - Wednesday, June 25: Switch Statements
-    + Presenter: TBD
+    + Presenter: Matt
 
 - Monday, June 30: Exception Handling
     + Presenter: TBD
