@@ -21,8 +21,13 @@ We will be starting lightning talks on various topics. Generally, each talk will
     + Presenter: Matt
 
 - Monday, June 30: Exception Handling
+    + Reading Starting Point: JS, definitive Guide "Jumps", section 5.6
+        * specifically: "throw": 5.6.5, "try/catch": 5.6.6
     + Presenter: TBD
-- Wednesday, July 2: TBD
+- Wednesday, July 2: Promises
+    + Reading Starting Point: 
+        - [Javascript Promises, there and Back Again](http://www.html5rocks.com/en/tutorials/es6/promises/)
+        - [q library homepage](http://documentup.com/kriskowal/q/)
     + Presenter: TBD
 
 - Monday, July 7: TBD
