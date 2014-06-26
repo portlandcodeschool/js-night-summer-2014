@@ -154,9 +154,10 @@
 
 ###Week 7: *June 23-29*
 + **Monday 6-9 PM**
-    * Topics: More Routes, Api routes, Test with Node Assert module
+    * Topics: Server routes
 + **Wednesday 6-9 PM**
-    * Topics: Express.js
+    * Topics: More Routes, HTTP verbs: (GET, POST, DELETE), Interpolation, Node Assert 
+    * [homework](https://github.com/portlandcodeschool/jsn-sum14-7)
 
 ###Week 8: *June 30-July 6*
 + **Monday 6-9 PM**
