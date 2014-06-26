@@ -1,0 +1,115 @@
+[
+  { "title": "Peanut Butter and Jelly",
+    "ingredients": [  { "ingredient":"peanut butter",
+                        "amount": 2,
+                        "unit":"tablespoon"
+                      },
+                      { "ingredient":"jelly",
+                        "amount": 1,
+                        "unit": "tablespoon"
+                      },
+                      { "ingredient": "bread",
+                        "amount": 2,
+                        "unit": "slice"
+                      }
+                    ],
+    "directions":  [  { "direction": "lay out two slices of bread",
+                        "duration": 0,
+                        "unit": ""
+                      }, 
+                      { "direction": "spread peanut butter",
+                        "duration": 0,
+                        "unit": ""
+                      }, 
+                      { "direction": "spread jelly",
+                        "duration": 0,
+                        "unit": ""
+                      },
+                      { "direction": "put sandwich together",
+                        "duration": 0,
+                        "unit": ""
+                      },
+                      {
+                        "direction": "eat",
+                        "duration": 0,
+                        "unit": ""
+                      }
+                    ]
+  },
+  { "title": "Awesome Chicken",
+  "ingredients": [  { "ingredient":"whole chicken",
+                      "amount": 1,
+                      "unit":""
+                    },
+                    { "ingredient":"olive oil",
+                      "amount": 2,
+                      "unit": "tablespoon"
+                    },
+                    { "ingredient": "garlic",
+                      "amount": 2,
+                      "unit": "clove"
+                    },
+                    { "ingredient": "paprika",
+                      "amount": 2,
+                      "unit": "tablespoon"
+                    },
+                    { "ingredient": "salt",
+                      "amount": 0.5,
+                      "unit": "teaspoon"
+                    },
+                    { "ingredient": "pepper",
+                      "amount": 0.5,
+                      "unit": "teaspoon"
+                    },
+                    { "ingredient": "orange zest",
+                      "amount": 1,
+                      "unit": "tablespoon"
+                    },
+                    { "ingredient": "orange juice",
+                      "amount": 2,
+                      "unit": "tablespoon"
+                    }
+
+                  ],
+  "directions":  [  { "direction": "press garlic and add to a small bowl",
+                      "duration": 0,
+                      "unit": ""
+                    }, 
+                    { "direction": "add olive oil, paprika, salt, and pepper (you can use more or less of each to taste)",
+                      "duration": 0,
+                      "unit": ""
+                    },
+                    {
+                      "direction": "add the orange zest and orange juice",
+                      "duration": 0,
+                      "unit": ""
+                    },
+                    { "direction": "mix ingredients until you have a consistency between a sauce and a paste",
+                      "duration": 0,
+                      "unit": ""
+                    },
+                    { "direction": "spread mix on chicken",
+                      "duration": 0,
+                      "unit": ""
+                    },
+                    { "direction": "put a half of the remainder of the orange inside the chicken",
+                      "duration": 0,
+                      "unit": ""
+                    },
+                    { "direction": "cover chicken with foil and bake at 425 degrees",
+                      "duration": 45,
+                      "unit": "minutes"
+                    },
+                    { "direction": "uncover chicken and continue to bake",
+                      "duration": 35,
+                      "unit": "minutes"
+                    },
+                    {
+                      "direction": "eat",
+                      "duration": 0,
+                      "unit": ""
+                    }
+                  ]
+  }
+
+]
