@@ -161,13 +161,13 @@
 
 ###Week 8: *June 30-July 6*
 + **Monday 6-9 PM**
-    * Topics: The DOM, jQuery: part 1
+    * Topics: Catch-up, more npm, Express.js
 + **Wednesday 6-9 PM**
-    * Topics: Express.js, jQuery: part 2
+    * Topics: More Express, more node catch-up, The DOM
 
 ###Week 9: *July 7-13*
 + **Monday 6-9 PM**
-    * Topics: More Exrpess, Data Persistence: Orchestrate.io, jQuery: part 3
+    * Topics: Data Persistence: Orchestrate.io, jQuery: part 1
 + **Wednesday 6-9 PM**
     * Topics: Orchestrate.io, Overflow
 
