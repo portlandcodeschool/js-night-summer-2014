@@ -168,6 +168,9 @@
 ###Week 9: *July 7-13*
 + **Monday 6-9 PM**
     * Topics: Data Persistence: Orchestrate.io, jQuery: part 1
+    * Before Today: 
+        - [Go set up an Orchestrate.io account](http://orchestrate.io/)
+        - [Read about the Orchestrate node module](https://www.npmjs.org/package/orchestrate)
 + **Wednesday 6-9 PM**
     * Topics: Orchestrate.io, Overflow
 

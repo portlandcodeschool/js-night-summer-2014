@@ -18,7 +18,7 @@ app.engine('html', consolidate.hogan);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 
-// app.set('env', 'production'); 
+//app.set('env', 'production'); 
 
 // express middleware
 app.use(logger('dev'));

@@ -4,7 +4,7 @@ var logger = require('morgan');
 
 var app = express();
 
-var headerPartial =  '<body><head><title>Todos</title></head><h1>My Todos</h1><ol>';
+var headerPartial =  '<html><body><head><title>Todos</title></head><h1>My Todos</h1><ol>';
 var footerPartial =  '</ol></body><footer>Portland Code School Rules, yo!</footer></html>';
 
 
@@ -20,7 +20,7 @@ app.get('/', function (req, res) {
     return '<li>' + item + '</li>';
   }).join('');
   responseBody += footerPartial;
-  res.send(200, responseBody);
+  res.send(200,responseBody);
 });
 
 app.listen(3000, function () {
