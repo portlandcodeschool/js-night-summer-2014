@@ -164,6 +164,10 @@
     * Topics: Catch-up, more npm, Express.js
 + **Wednesday 6-9 PM**
     * Topics: More Express, more node catch-up, The DOM
+    * Reading to help understand the DOM: 
+        - [MDN Web Api Guide: DOM](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM)
+        - [MDN: Element](https://developer.mozilla.org/en-US/docs/Web/API/element)
+        - JS: Definitive Guide: Section 2: Client-Side Javascript (particularly chapter 15, "Scripting Documents")
 
 ###Week 9: *July 7-13*
 + **Monday 6-9 PM**
