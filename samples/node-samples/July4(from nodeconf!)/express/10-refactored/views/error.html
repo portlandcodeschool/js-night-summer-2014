@@ -1,0 +1,11 @@
+<!-- block content
+  h1= message
+  h2= error.status
+  pre #{error.stack}
+ -->
+
+{{>header}}
+<h1>{{message}}</h1>
+<h2>{{error.status}}</h2>
+<pre><code>{{error.stack}}</code></pre>
+{{>footer}}

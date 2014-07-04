@@ -1,0 +1,10 @@
+{{>header}}
+
+  <h2>Todos</h2>
+  <ol>
+    {{#items}}
+      <li>{{.}}</li>
+    {{/items}}
+  </ol>
+
+{{>footer}}
