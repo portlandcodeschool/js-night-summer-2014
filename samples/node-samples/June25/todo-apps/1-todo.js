@@ -30,7 +30,10 @@ var server = http.createServer(function (req, res) {
 
   } else if (req.method === 'DELETE') {
 
-    var requestedId = parseInt(pathRequested.slice(1), 10);
+    // this line was incorrect before
+    // to get the number off of the end of the url (only one digit)
+    // you can do slice(-1). before, it said slice(1), which is wrong
+    var requestedId = parseInt(pathRequested.slice(-1), 10);
 
     if (isNaN(requestedId)) {
       res.statusCode = 400; //bad request
