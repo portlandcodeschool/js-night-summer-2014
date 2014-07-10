@@ -119,16 +119,8 @@ $jq0 instanceof $ //true
 
 // Example: generating board
 
-$body = $('body');
-$tab = $('<table></table>');
-$body.append($tab);
-//$tr = $('<tr></tr>');
-for (var i=0; i<8; i++)
-	$tab.append($('<tr></tr>'));
-
-$td = $('<td></td>');
-for (var i=0; i<8; i++)
-	$tab.children().append($td);
+// Some broken code was here mistakenly;
+// as a bad example, it's now removed.
 
 
 // Example: generating checkers
