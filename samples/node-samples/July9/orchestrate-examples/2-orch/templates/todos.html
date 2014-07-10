@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Todos</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/lib/jquery.js"></script>
+</head>
+<body class="container-fluid col-xs-6">
+  <h2>Add a Todo</h2>
+  <div class="form-group">
+    <label for="todo-input"></label>
+    <input id="todo-input" class="form-control" type="text">
+    <br>
+    <button id="add-todo" class="btn btn-success">Add todo</button>
+  </div>
+  <br><br>
+  <h3>My Todos</h3>
+  <ol class="list-group">
+    {{#items}}
+      <li class="list-group-item">{{.}}</li>
+    {{/items}}
+  </ol>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

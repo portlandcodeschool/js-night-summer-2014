@@ -1,0 +1,23 @@
+{
+  "name": "orchestrate-example-1",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Benjamin P. Verble",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.0.2",
+    "consolidate": "^0.10.0",
+    "cookie-parser": "~1.0.1",
+    "debug": "~0.7.4",
+    "express": "^4.0.0",
+    "hogan.js": "^3.0.2",
+    "morgan": "^1.0.1",
+    "orchestrate": "^0.1.2",
+    "q": "^1.0.1",
+    "raw-body": "^1.2.2"
+  }
+}

@@ -168,6 +168,7 @@
         - [MDN Web Api Guide: DOM](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM)
         - [MDN: Element](https://developer.mozilla.org/en-US/docs/Web/API/element)
         - JS: Definitive Guide: Section 2: Client-Side Javascript (particularly chapter 15, "Scripting Documents")
+    * [homework](https://github.com/portlandcodeschool/jsn-sum14-8)
 
 ###Week 9: *July 7-13*
 + **Monday 6-9 PM**
@@ -177,6 +178,7 @@
         - [Read about the Orchestrate node module](https://www.npmjs.org/package/orchestrate)
 + **Wednesday 6-9 PM**
     * Topics: Orchestrate.io, Overflow
+    * [homework](https://github.com/portlandcodeschool/jsn-sum14-9)
 
 ###Week 10: *July 14-20*
 + **Monday 6-9 PM**
