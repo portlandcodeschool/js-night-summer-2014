@@ -38,10 +38,10 @@ We will be starting lightning talks on various topics. Generally, each talk will
 
 - Monday, July 14: 
 	+ NoSQL/Orchestrate
+		* Presenter: 
+    + Backbone
+		* Presenter: 
 
 - Wednesday, July 16:
-    + Backbone
-
-- Monday, July 21:
 	+ Websockets
-
+		* Presenter: 
