@@ -36,3 +36,12 @@ We will be starting lightning talks on various topics. Generally, each talk will
         - [q library homepage](http://documentup.com/kriskowal/q/)
     + Presenter: Chad
 
+- Monday, July 14: 
+	+ NoSQL/Orchestrate
+
+- Wednesday, July 16:
+    + Backbone
+
+- Monday, July 21:
+	+ Websockets
+
