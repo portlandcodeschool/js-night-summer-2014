@@ -184,6 +184,9 @@
 ###Week 10: *July 14-20*
 + **Monday 6-9 PM**
     * Topics: Backbone starts, Backbone Routes, Simple Views, Simple Models
+    * Reading: 
+        - [Backone JS docs: Router](http://backbonejs.org/#Router)
+        - [Backone JS docs: View](http://backbonejs.org/#View)
 + **Wednesday 6-9 PM**
     * Topics: Nested Views in Backbone, Backbone Collections
 
