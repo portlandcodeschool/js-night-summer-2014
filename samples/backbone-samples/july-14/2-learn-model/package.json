@@ -1,0 +1,17 @@
+{
+  "name": "backbone-example-2",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Benjamin P. Verble",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.4.3",
+    "express": "^4.5.1",
+    "morgan": "^1.1.1"
+  }
+}

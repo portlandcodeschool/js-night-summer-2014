@@ -129,7 +129,7 @@
             - Click the green button
             - You may also use any of the installation instructions in the readings if you feel more comfortable with that
     * [Slideshow - Node.js](https://docs.google.com/presentation/d/1Jr8pbvZqWjah9xkq77lK-ejXA-vWj5kKZ3F7xMsVRJ8/pub?start=false&loop=false&delayms=60000)
-    * [Homework #6 "Preview"](https://github.com/portlandcodeschool/jsn-sum14-6)
+    * [Homework 6](https://github.com/portlandcodeschool/jsn-sum14-6)
 
 + **Wednesday 6-9 PM**
     * Topics: Node HTTP server, review basic node concepts, internet concepts (http, server, client)
@@ -157,7 +157,7 @@
     * Topics: Server routes
 + **Wednesday 6-9 PM**
     * Topics: More Routes, HTTP verbs: (GET, POST, DELETE), Interpolation, Node Assert 
-    * [homework](https://github.com/portlandcodeschool/jsn-sum14-7)
+    * [homework 7](https://github.com/portlandcodeschool/jsn-sum14-7)
 
 ###Week 8: *June 30-July 6*
 + **Monday 6-9 PM**
@@ -168,7 +168,7 @@
         - [MDN Web Api Guide: DOM](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM)
         - [MDN: Element](https://developer.mozilla.org/en-US/docs/Web/API/element)
         - JS: Definitive Guide: Section 2: Client-Side Javascript (particularly chapter 15, "Scripting Documents")
-    * [homework](https://github.com/portlandcodeschool/jsn-sum14-8)
+    * [homework 8](https://github.com/portlandcodeschool/jsn-sum14-8)
 
 ###Week 9: *July 7-13*
 + **Monday 6-9 PM**
@@ -178,11 +178,15 @@
         - [Read about the Orchestrate node module](https://www.npmjs.org/package/orchestrate)
 + **Wednesday 6-9 PM**
     * Topics: Orchestrate.io, Overflow
-    * [homework](https://github.com/portlandcodeschool/jsn-sum14-9)
+    * [homework 9](https://github.com/portlandcodeschool/jsn-sum14-9)
+    * [orchestrate node module/ readme](https://www.npmjs.org/package/orchestrate)
 
 ###Week 10: *July 14-20*
 + **Monday 6-9 PM**
     * Topics: Backbone starts, Backbone Routes, Simple Views, Simple Models
+    * Reading: 
+        - [Backone JS docs: Router](http://backbonejs.org/#Router)
+        - [Backone JS docs: View](http://backbonejs.org/#View)
 + **Wednesday 6-9 PM**
     * Topics: Nested Views in Backbone, Backbone Collections
 
