@@ -1,0 +1,102 @@
+* Review of Client & Server Javascript
+So before we get into our final projects for this course, let's go ahead and review the basics of how to use Javascript for both server-side and client-side programming. We'll be going through a series of small examples, building up on themselves until we eventually have a small application with enough features to flex our new-found muscle. There will be suggested exercises throughout giving ideas for how to modify the examples or writing your own applications. 
+** Core Ideas
+   So first let us discuss what the major ideas of what we've covered since leaving the basics of the javascript language. Basically, we've gone from a world that consists only of javascript code existing in a vaccuum that can, occasionally, print things to the output we're now considering javascript as a part of an ecosystem for web development. 
+
+   The two main components for any application deployed over the network, web app or otherwise, are
+   + the client code
+   + the server code
+where the client handles the display of data and controlling the user interface to the application and the server code handles the real /logic/ of the application: the way data is stored and retrieved, what users can access what functionality, and keeping everything synced between the various clients.
+
+In the case of the programs we're dealing with, both the client and server are going to be written in Javascript. Both sides don't have to be written in the same language, and I dare say that the most common case is that they are /not/. One of the reasons, I think, for Node's popularity is that you can take your skills in javascript for client side programming and use them for server side programming as well. It's an understandably nice feature. On the other hand, I think it might make the distinction between client and server unclear to newcomers! In this review I'll be attempting to elucidate where the different bits of code are running: the client's browser or a server process. A general rule of thumb, though, is that if the code is making the HTML interactive in some way then it must be running in the client browser and otherwise it is probably running on the server. Yes, even most templating like we've seen in Express is actually server-side code that /generates/ HTML rather than scripts that are included in the browser along /with/ the HTML.
+
+We're not really making the Model-View-Controller distinction here, per se, but it shows up a little bit in terms of how we'll eventually refactor things a bit.
+
+We'll more or less follow the progression
+** Our First Node Server
+Our very first Node server is going to be rather simple: it'll be a kind of "echo" server that will spit back out to the client "You said: message-from-client". This is shockingly simple when it comes to Node and so let's just include the code below:
+
+#+BEGIN_SRC js :exports code :tangle FirstServer.js
+  var http = require('http');
+
+  var server = http.createServer(function (req,res) {
+      res.writeHead(200, {'Content-Type' : 'text/plain'});
+      var msg = "";
+      req.on('data', function (chunk) {
+          msg = msg + chunk.toString();
+      });
+      req.on('end', function () {
+          res.write("You said: " + msg);
+          res.end();
+      })
+  });
+
+  server.listen(3000);
+
+  console.log("Listening on port 3000\n");
+#+END_SRC
+
+Now let's talk about what this actually means piece by piece. The first thing is that we need to include the HTTP library in line 1 when we say ~var http = require('http')~. The next important line is that we actually create our server using the HTTP library function ~http.createServer~. This might be a good time to review that when we make a module with ~require~ we're actually returning the value of ~module.exports~, which is often but not always an object, so we're actually accessing the functions of the libraries as methods of the object created by the ~require~ statement. 
+
+Here, we give ~http.createServer~ a single argument: a callback. This callback itself takes two arguments: the incoming request object and the pre-made response object that will be fed back to the client. Under the hood, node is going to build an object of the class ~http.IncomingMessage~ that holds the data for the request and an object of the class ~http.ServerResponse~ that will hold the response to be sent back to the server and then passes those to the callback. You don't particularly need to know what happens under the hood, I don't really know what the code looks like under the hood, but that's the point of a library: you interact with the interface not the implementation.
+
+This wasn't the only way we could write this function, though. For example, since ~http.createServer~ returns an /object/ then we could have collapsed a couple of those lines together with "method chaining" and instead said
+
+#+BEGIN_SRC js :exports code :tangle FirstServer-2.js
+  var http = require('http');
+
+  http.createServer(function (req,res) {
+      res.writeHead(200, {'Content-Type' : 'text/plain'});
+      var msg = "";
+      req.on('data', function (chunk) {
+          msg = msg + chunk.toString();
+      });
+      req.on('end', function () {
+          res.write("You said: " + msg);
+          res.end();
+      });
+  }).listen(3000);
+
+  console.log("Listening on port 3000\n");
+#+END_SRC
+
+We could also simplify things a bit by combining the ~write~ and ~end~ into one step and using method chaining on the ~req~ to assign multiple event handlers at once so then we get
+
+#+BEGIN_SRC js :exports code :tangle FirstServer-3.js
+  var http = require('http');
+
+  http.createServer(function (req,res) {
+      res.writeHead(200, {'Content-Type' : 'text/plain'});
+      var msg = "";
+      req.on('data', function (chunk) {
+          msg = msg + chunk.toString();
+      }).on('end', function () {
+          res.end("You said: " + msg);
+      });
+  }).listen(3000, function () {
+      console.log("Listening on port 3000\n");
+  });
+#+END_SRC
+
+Beyond that, I'm not sure if there's really good ways to make it simpler without potentially just making it harder to read. 
+
+** A More Complicated Node Server
+*** The Basic Design
+*** Handling Requests
+*** Making Data Persistent with Files
+*** Making Data Persistent with Orchestrate
+** Our First Express Server
+*** An Aside: package.json
+    As we add more complicated functionality to our servers we'll need to add libraries
+
+** A Microblogging Express Server
+*** Adding a Real Interface: html forms
+** JQuery and the Rise of the Dom
+*** Finding Elements in JQuery
+*** Changing Classes
+*** Event Handling
+** Microblog Redux
+Now we're going to move away from using html forms the old fashion way with http actions and, instead, rely entirely on javascript code to make our buttons and all that work without forcing any page reloads. 
+*** One Last Thing: History API 
+
+
