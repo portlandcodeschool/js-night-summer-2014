@@ -37,11 +37,17 @@ We will be starting lightning talks on various topics. Generally, each talk will
     + Presenter: Chad
 
 - Monday, July 14: 
-	+ NoSQL/Orchestrate
-		* Presenter: 
+  	  + NoSQL/Orchestrate
+		* Presenter: Christian
     + Backbone
-		* Presenter: 
+		* Presenter: Kellen
 
 - Wednesday, July 16:
 	+ Websockets
-		* Presenter: 
+		* Presenter: Adam
+
+- Monday, July 21:
+  	  + Underscore.JS
+		* Presenter:
+	  + Browserify
+		* Presenter:
