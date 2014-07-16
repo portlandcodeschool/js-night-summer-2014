@@ -213,10 +213,18 @@ Okay, so first we'll make a hogan template file for displaying posts that will a
   var fs = require('fs');
   var hogan = require('hogan.js');
 
-  var templateFile = fs.readFileSync('posts-1.html');
+  var templateFile = fs.readFileSync('posts-1.html').toString();
+  console.log(templateFile);
   var template = hogan.compile(templateFile);
 
   var posts = [];
+
+  function extractValue(str){
+      // this function is for splitting the data returned by a form
+      // we need to split it across the = sign
+      var index = str.indexOf('=');
+      return str.slice(index+1);
+  }
 
   http.createServer(function (req,res) {
       var method = req.method;
@@ -224,14 +232,20 @@ Okay, so first we'll make a hogan template file for displaying posts that will a
       var urlPath = urlObj.path.slice(1).split('/')[0];
 
       if(method === "GET" && urlPath===""){
-          template.render({posts : posts});
+          var html = template.render({posts : posts});
+          res.writeHead(200,{"Content-Type" : "text/html"});
+          res.end(html);
       }
       else if (method === "POST" && urlPath ==="addpost") {
           var tempPost = "";
           req.on("data", function (chunk) {
-              
+              tempPost = tempPost + chunk.toString();
           });
           req.on("end", function () {
+              var html ='<a href="/">Go Back</a>'
+              posts.push(extractValue(tempPost));
+              res.writeHead(200,{"Content-Type" : "text/html"});
+              res.end(html);
           });
       }
   }).listen(3000, function () {
@@ -239,6 +253,18 @@ Okay, so first we'll make a hogan template file for displaying posts that will a
   });
 
 #+END_SRC
+
+This code is a lot longer than our first attempt. Let's try to understand the logic of what's happening here. First off, we've got the dispatch over method and url path that we looked at earlier. So hopefully that's not too weird at this point. Now if we're just loading the main page, then we take the template file we loaded with the ~fs.readFileSync~ and compiled with ~hogan.compile~ and we then /render/ it by passing in the object ~{ posts : posts}~ which turns it into a /string/ that contains the HTML we'll send back to the client. So what's ~{ posts : posts}~ mean? Well, we're telling the template renderer that where we used the variables ~posts~ in the template it should have the values of the variables ~posts~ in our code. Now, these variables don't have to be named the same thing at all but I find it easier to remember if there's a consistency between the names of the variables-in-the-template and the variables-in-the-code. In our template we have a form that will pass along 
+
+Let's also talk about what's happening with the /other/ request that's being handled which is a POST request to the url path "addpost". Since we're using straight-up node without any extra libraries other than templating, that means our data retrieval is inherently asynchronous. As such in order to get data out of the request we need to write our data handlers for the ~data~ and ~end~ events. The ~data~ request just does what we've seen earlier: we push all of the data into some variable we've set aside for this purpose. When we're done retrieving data, i.e. when the ~end~ event happens that's when we actually do something. So what do we do? Well, we take the data returned by the form on the main page, split it into the actual /value/ we want with our simple ~extractValue~ function. We need to do this because the form returns data in the form of "post=blahblahblah". Why? Well, it's because we had an input with the /name/ attribute set to /post/. This is a good of time as any to point out that the form element of the template was set to have an /action/ of "\/addpost" because that's the URL path of the request we'll handle and the /method/ set to POST.
+
+Hopefully this helps explain what's happening in this code so far. To summarize we've covered so far:
+  + How to make simple http servers
+  + How to respond to different urls and http method types
+  + How to use simple templates and compile them with Hogan.js
+  + How to use forms to send data from the client to the server
+
+So you'll notice that we're just sending back simple and completely unformatted HTML. We're going to start talking about client-side scripting, styling, and jQuery now. 
 
 *** Making Data Persistent with Files
 *** Making Data Persistent with Orchestrate
