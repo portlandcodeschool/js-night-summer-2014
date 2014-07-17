@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<body>
+  <h1>Make Post</h1>
+  <form action="/addpost" method="post">
+    <input name="post" placeholder="Say something" type="text" maxlength="140">
+    <button type="submit">Post</button>
+  </form>
+  <h1>Posts</h1>
+  <ul>
+    {{#posts}}
+    <li>{{.}}</li>
+    {{/posts}}
+  </ul>
+</body>
+</html>
