@@ -80,7 +80,7 @@ We could also simplify things a bit by combining the ~write~ and ~end~ into one 
 
 Beyond that, I'm not sure if there's really good ways to make it simpler without potentially just making it harder to read. 
 
-** A More Complicated Node Server
+** More Complicated Node Servers
 Now let's try building our way up into a more complete server that can handle a small "microblogging" style service, except we'll only be dealing with a single user just to simplify everything at first. 
 *** Handling Requests
 Our first lesson in making a more complicated server is how to deal with proper HTTP requests from the client. To review briefly, there are four major request methods that you'll need to deal with
@@ -118,7 +118,7 @@ in order to handle these request methods in just plain node, we simply need to d
 #+END_SRC
 
 This is a very simple and perhaps silly example, but this is the basic structure of how we respond to different types of requests.
-
+*** Handling URLs
 The other skill we need to brush up on is how to dispatch over the url of the site, which we can do with using the url library in node in order to parse the url into pieces. The first thing we'll do is just make sure that we handle displaying the posts if we make a get request to the root.
 
 #+BEGIN_SRC js :exports code :tangle UrlDispatch.js
@@ -140,7 +140,7 @@ The other skill we need to brush up on is how to dispatch over the url of the si
 #+END_SRC
 
 The actual structure of the object that ~url.parse~ returns is given here: http://nodejs.org/docs/latest/api/url.html The main thing we need to pay attention to here is that the ~.path~ property will give us, as a string, the rest of the url after the actual domain so for example "http://mythingy.io/stuff/thing" then ~.path~ will give us the string "/stuff/thing" and we can thus pop off the first "/" with a ~.slice(1)~ and then break it into an array with ~.split('/')~. 
-
+*** Microblogging: First try
 So let's go ahead and try to take a first stab at our microblogging site. We'll be doing some very, very simple HTML generation that will look awful but hopefully be at least renderable. 
 
 To start with we'll just try to display the result of our GET at the root
@@ -172,7 +172,7 @@ To start with we'll just try to display the result of our GET at the root
 #+END_SRC
 
 Go ahead and try running the server and seeing what happens if you navigate to localhost:3000. It should display the simple little html that we've written.
-
+*** Microblogging: Try Two
 Now, let's go ahead and try to write a version of the server that can handle taking in input as well. We'll also, in this case, be using hogan.js in order to do some templating and making this a little bit easier. Note that we'll be using straight-up hogan for templating and /not/ using it as middle-ware because I want to demystify what's happening with these template engines a little bit.
 
 So first before you actually try running anything you'll need to type this in your command line
@@ -251,7 +251,6 @@ Okay, so first we'll make a hogan template file for displaying posts that will a
   }).listen(3000, function () {
       console.log("Listening on port 3000\n")
   });
-
 #+END_SRC
 
 This code is a lot longer than our first attempt. Let's try to understand the logic of what's happening here. First off, we've got the dispatch over method and url path that we looked at earlier. So hopefully that's not too weird at this point. Now if we're just loading the main page, then we take the template file we loaded with the ~fs.readFileSync~ and compiled with ~hogan.compile~ and we then /render/ it by passing in the object ~{ posts : posts}~ which turns it into a /string/ that contains the HTML we'll send back to the client. So what's ~{ posts : posts}~ mean? Well, we're telling the template renderer that where we used the variables ~posts~ in the template it should have the values of the variables ~posts~ in our code. Now, these variables don't have to be named the same thing at all but I find it easier to remember if there's a consistency between the names of the variables-in-the-template and the variables-in-the-code. In our template we have a form that will pass along 
@@ -263,10 +262,78 @@ Hopefully this helps explain what's happening in this code so far. To summarize 
   + How to respond to different urls and http method types
   + How to use simple templates and compile them with Hogan.js
   + How to use forms to send data from the client to the server
-
-So you'll notice that we're just sending back simple and completely unformatted HTML. We're going to start talking about client-side scripting, styling, and jQuery now. 
-
 *** Making Data Persistent with Files
+    You'll notice that every time you restart the server that the data you've entered disappears. That's because it isn't /persistent/. In order for the data to last beyond just the single program we need to add some way of storing the data permanently. We'll eventually use databases for this but, to start, we'll just go ahead and use good-ol' files. Since our posts are just a simple list we can do this datastructure very simply.
+
+We'll continue using our template from before and /most/ of the code will be the same. We're going to take the opportunity to review modules though and separate out our interface for the posts into a different file as follows
+
+#+BEGIN_SRC js :exports code :tangle filedb.js
+  var fs = require('fs');
+
+  var filename = "posts.dat"
+
+  function writeData (newPost) {
+      fs.appendFileSync(filename,newPost+'\n');
+  }
+
+  function readData (){
+      var str = fs.readFileSync(filename).toString();
+      return str.split('\n');
+  }
+
+  module.exports.writeData = writeData;
+  module.exports.readData = readData;
+#+END_SRC
+
+We can now modify our previous code:
+
+#+BEGIN_SRC js :exports code :tangle Microblog-3.js
+  var http = require('http');
+  var url = require('url');
+  var fs = require('fs');
+  var hogan = require('hogan.js');
+  var db = require('filedb');
+  var templateFile = fs.readFileSync('posts-1.html').toString();
+  console.log(templateFile);
+  var template = hogan.compile(templateFile);
+
+  var posts = [];
+
+  function extractValue(str){
+      // this function is for splitting the data returned by a form
+      // we need to split it across the = sign
+      var index = str.indexOf('=');
+      return str.slice(index+1);
+  }
+
+  http.createServer(function (req,res) {
+      var method = req.method;
+      var urlObj = url.parse(req.url,true);
+      var urlPath = urlObj.path.slice(1).split('/')[0];
+      
+      if(method === "GET" && urlPath===""){
+          posts = db.readData();
+          var html = template.render({posts : posts});
+          res.writeHead(200,{"Content-Type" : "text/html"});
+          res.end(html);
+      }
+      else if (method === "POST" && urlPath ==="addpost") {
+          var tempPost = "";
+          req.on("data", function (chunk) {
+              tempPost = tempPost + chunk.toString();
+          });
+          req.on("end", function () {
+              var html ='<a href="/">Go Back</a>'
+              db.writeData(extractValue(tempPost));
+              res.writeHead(200,{"Content-Type" : "text/html"});
+              res.end(html);
+          });
+      }
+  }).listen(3000, function () {
+      console.log("Listening on port 3000\n")
+  });
+#+END_SRC
+
 *** Making Data Persistent with Orchestrate
 ** Our First Express Server
 *** An Aside: package.json
@@ -274,11 +341,13 @@ So you'll notice that we're just sending back simple and completely unformatted 
 
 ** A Microblogging Express Server
 *** Adding a Real Interface: html forms
-** JQuery and the Rise of the Dom
-*** Finding Elements in JQuery
-*** Changing Classes
-*** Event Handling
 ** Microblog Redux
+*** JQuery and the Rise of the Dom
+So you'll notice that we're just sending back simple and completely unformatted HTML. We're going to start talking about client-side scripting, styling, and jQuery now. 
+**** Finding Elements in JQuery
+**** Changing Classes
+**** Event Handling
+
 Now we're going to move away from using html forms the old fashion way with http actions and, instead, rely entirely on javascript code to make our buttons and all that work without forcing any page reloads. 
 *** One Last Thing: History API 
 
