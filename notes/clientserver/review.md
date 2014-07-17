@@ -236,7 +236,7 @@ Okay, so first we'll make a hogan template file for displaying posts that will a
       <h1>Posts</h1>
       <ul>
         {{#posts}}
-        <li>{{.}}</li>
+        <li>{{.}}</li>nnn
         {{/posts}}
       </ul>
     </body>
