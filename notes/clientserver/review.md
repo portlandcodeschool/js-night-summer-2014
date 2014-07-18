@@ -19,6 +19,7 @@
 <li><a href="#sec-1-4">1.4. Our First Express Server</a>
 <ul>
 <li><a href="#sec-1-4-1">1.4.1. An Aside: package.json</a></li>
+<li><a href="#sec-1-4-2">1.4.2. Our First Express Server For Realzies</a></li>
 </ul>
 </li>
 <li><a href="#sec-1-5">1.5. A Microblogging Express Server</a>
@@ -378,11 +379,131 @@ So first go ahead and run
 
     npm install orchestrate
 
+Then make a new Orchestrate application through the dashboard. Mine is going to be named "clarissa-tutorial", and it's reasonable to follow the convention when naming yours, although you can name it anything you want up-to-and-including "a-cat-named-princess-ozma-fuzzy-butt" because let's be honest with ourselves that is an amazing name for a cat though a bit wordy for an application name.
+
+We'll still keep the same template file, but we need to add a new file called `config.js` in which we'll keep our api key for our Orchestrate database.
+
+    module.exports = [YOUR KEY HERE]
+
+    var http = require('http');
+    var url = require('url');
+    var fs = require('fs');
+    var hogan = require('hogan.js');
+    // loading our API key from our config file
+    var apiKey = require('./config');
+    
+    // loading our connection to 
+    var db = require('orchestrate')(apiKey);
+    
+    var templateFile = fs.readFileSync('posts-1.html').toString();
+    var template = hogan.compile(templateFile);
+    
+    var posts = [];
+    
+    function extractValue(str){
+        // this function is for splitting the data returned by a form
+        // we need to split it across the = sign
+        var index = str.indexOf('=');
+        return str.slice(index+1);
+    }
+    
+    http.createServer(function (req,res) {
+        var method = req.method;
+        var urlObj = url.parse(req.url,true);
+        var urlPath = urlObj.path.slice(1).split('/')[0];
+    
+        if(method === "GET" && urlPath===""){
+            db.list('posts').then(function (results) {
+                var prePosts = results.body.results;
+                posts = prePosts.map(function (p) {
+                    return p.value.text;
+                });
+                var html = template.render({posts : posts});
+                res.writeHead(200,{"Content-Type" : "text/html"});
+                res.end(html);
+            }).fail(function (err) {
+                console.log(err);
+                res.end(err);
+            });
+        }
+        else if (method === "POST" && urlPath ==="addpost") {
+            var tempPost = "";
+            req.on("data", function (chunk) {
+                tempPost = tempPost + chunk.toString();
+            });
+            req.on("end", function () {
+                var html ='<a href="/">Go Back</a>';
+                var newKey = posts.length;
+                db.put('posts',newKey.toString(), 
+                       { "text" : extractValue(tempPost)}).then( function (r) {
+                           res.writeHead(200,{"Content-Type" : "text/html"});
+                           res.end(html);
+                       });
+            });
+        }
+    }).listen(3000, function () {
+        console.log("Listening on port 3000\n")
+    });
+
+Before we move on to talking about using Express to make simpler servers let's talk about how we've had to change our code to work with Orchestrate. First off, we need to require Orchestrate with `require('orchestrate')` but then, strangely, we do this thing where we *apply* it to our API key immediately? I know this has confused some people so let's just explain with the following code sample
+
+    function myPlus(a){
+        return function (b) {
+            return a+b;
+        };
+    }
+    
+    console.log(myPlus(1)(1)); //should equal 2
+
+In other words, if we have functions that return other functions then we can pass the arguments one at a time in order to compute the final result. In our example, we can write a version of `+` that takes its two arguments one at a time. In formal terms, this is called "currying" named after Haskell Curry, but that's a digression for another time. So when we have the line `require('orchestrate')(apiKey)` it means that the `module.exports` that orchestrate returns is a *function* that eats the API key and gives us the connection to the database.
+
+Rather than using our `readData` and `writeData` functions that we wrote ourselves for our file based persistence we instead use the built in Orchestrate functions `.list` and `.put`. These functions have fairly simple signatures. `.list` takes the name of a collection and then, well actually that's the key word now isn't it? It's not terribly useful at all unless we use the promise `.then` in order to set an action to take once the data within the collection has been retrieved. In this case, `.then` takes a callback which takes the result of the retrieval as its only argument. Orchestrate data is a little more complicated than what our previous data looked like. So when we retrieve that data we need to acces the `.results` property to get back an *array* of Orchestrate data objects, and then we need to extract the *text* property out of the *value* object and to do this for each element of the array we use the `.map` method that every array comes with.
+
+Similarly when we write the data to the database we need to provide the collection, the key, and the data in a json format object. In this case we just include a single field, `text`, to the json object. 
+
 ## Our First Express Server<a id="sec-1-4" name="sec-1-4"></a>
+
+So we've done an awful lot now with just basic Node and it's time to move on to doing things The Easier Way by using Express. Let's start with the very basics of an Express server, but we first need a bit of a digression.
 
 ### An Aside: package.json<a id="sec-1-4-1" name="sec-1-4-1"></a>
 
-As we add more complicated functionality to our servers we'll need to add libraries, this means that we'll have our `package.json` file that we need to run in our directory before we actually try running our files.
+As we add more complicated functionality to our servers we'll need to add libraries, this means that we'll have our `package.json` file that we need to run in our directory before we actually try running our files. The package.json file we'll be using has the following contents
+
+    {
+        "name" : "tutorial",
+        "description" : "our fair tutorial",
+        "dependencies" : {
+            "express" : "*",
+            "consolidate" : "*",
+            "morgan" : "*",
+            "orchestrate" : "*",
+            "q" : "*",
+            "body-parser" : "*",
+            "hogan.js" : "*"
+        }
+    }
+
+Now we're using a little bit of bad form here because really we should specify version numbers and not just say "\*", which means use the latest version of the dependency, and in general you should pick particular versions or limit the versions somehow. 
+
+Now that we have our package file go ahead and run the following command
+
+    npm install
+
+### Our First Express Server For Realzies<a id="sec-1-4-2" name="sec-1-4-2"></a>
+
+We'll make a super simple echo server like our first basic Node server, but this time with Express to explain the basics of how you *start* an Express server.
+
+    var express = require('express');
+    var bodyparser = require('body-parser');
+    
+    var app = express();
+    app.use(bodyparser.text());
+    
+    app.post('/', function (req, res) {
+        res.send(200, req.body);
+    }).listen(3000, function () {
+        console.log("Listening on port 3000\n");
+    });
 
 ## A Microblogging Express Server<a id="sec-1-5" name="sec-1-5"></a>
 

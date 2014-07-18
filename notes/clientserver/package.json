@@ -1,0 +1,14 @@
+
+{
+    "name" : "tutorial",
+    "description" : "our fair tutorial",
+    "dependencies" : {
+        "express" : "*",
+        "consolidate" : "*",
+        "morgan" : "*",
+        "orchestrate" : "*",
+        "q" : "*",
+        "body-parser" : "*",
+        "hogan.js" : "*"
+    }
+}
