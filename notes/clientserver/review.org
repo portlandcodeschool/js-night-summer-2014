@@ -362,6 +362,64 @@ So first go ahead and run
 | ├──               | parse-link-header@0.1.0  | (xtend@2.0.6)               |                      |                 |           |                     |                   |                   |                  |              |                        |             |                  |
 | └──               | request@2.27.0           | (json-stringify-safe@5.0.0, | forever-agent@0.5.2, | aws-sign@0.3.0, | qs@0.6.6, | tunnel-agent@0.3.0, | oauth-sign@0.3.0, | cookie-jar@0.3.0, | node-uuid@1.4.1, | mime@1.2.11, | http-signature@0.10.0, | hawk@1.0.0, | form-data@0.1.4) |
 
+We'll still keep the same template file, but we need to add a new file 
+
+#+BEGIN_SRC js :exports code :tangle config.js
+  module.exports = [YOUR KEY HERE]
+#+END_SRC
+
+#+BEGIN_SRC js :exports code :tangle MicroBlog-4.js
+  var http = require('http');
+  var url = require('url');
+  var fs = require('fs');
+  var hogan = require('hogan.js');
+  // loading our API key from our config file
+  var apiKey = require('./config');
+
+  // loading our connection to 
+  var db = require('orchestrate')(apiKey);
+
+  var templateFile = fs.readFileSync('posts-1.html').toString();
+  var template = hogan.compile(templateFile);
+
+  var posts = [];
+
+  function extractValue(str){
+      // this function is for splitting the data returned by a form
+      // we need to split it across the = sign
+      var index = str.indexOf('=');
+      return str.slice(index+1);
+  }
+
+  http.createServer(function (req,res) {
+      var method = req.method;
+      var urlObj = url.parse(req.url,true);
+      var urlPath = urlObj.path.slice(1).split('/')[0];
+      
+      if(method === "GET" && urlPath===""){
+          db.
+          var html = template.render({posts : posts});
+          res.writeHead(200,{"Content-Type" : "text/html"});
+          res.end(html);
+      }
+      else if (method === "POST" && urlPath ==="addpost") {
+          var tempPost = "";
+          req.on("data", function (chunk) {
+              tempPost = tempPost + chunk.toString();
+          });
+          req.on("end", function () {
+              var html ='<a href="/">Go Back</a>'
+              db.writeData(extractValue(tempPost));
+              res.writeHead(200,{"Content-Type" : "text/html"});
+              res.end(html);
+          });
+      }
+  }).listen(3000, function () {
+      console.log("Listening on port 3000\n")
+  });
+
+#+END_SRC
+
 ** Our First Express Server
 *** An Aside: package.json
     As we add more complicated functionality to our servers we'll need to add libraries, this means that we'll have our ~package.json~ file that we need to run in our directory before we actually try running our files.
