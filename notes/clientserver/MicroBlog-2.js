@@ -5,7 +5,6 @@ var fs = require('fs');
 var hogan = require('hogan.js');
 
 var templateFile = fs.readFileSync('posts-1.html').toString();
-console.log(templateFile);
 var template = hogan.compile(templateFile);
 
 var posts = [];

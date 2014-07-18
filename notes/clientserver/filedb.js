@@ -9,7 +9,9 @@ function writeData (newPost) {
 
 function readData (){
     var str = fs.readFileSync(filename).toString();
-    return str.split('\n');
+    var temp = str.split('\n');
+    temp.pop();
+    return temp;
 }
 
 module.exports.writeData = writeData;

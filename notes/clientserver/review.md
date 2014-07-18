@@ -236,11 +236,13 @@ Okay, so first we'll make a hogan template file for displaying posts that will a
       <h1>Posts</h1>
       <ul>
         {{#posts}}
-        <li>{{.}}</li>nnn
+        <li>{{.}}</li>
         {{/posts}}
       </ul>
     </body>
     </html>
+
+and now we include it in our main code below
 
     var http = require('http');
     var url = require('url');
@@ -248,7 +250,6 @@ Okay, so first we'll make a hogan template file for displaying posts that will a
     var hogan = require('hogan.js');
     
     var templateFile = fs.readFileSync('posts-1.html').toString();
-    console.log(templateFile);
     var template = hogan.compile(templateFile);
     
     var posts = [];
@@ -313,7 +314,9 @@ We'll continue using our template from before and *most* of the code will be the
     
     function readData (){
         var str = fs.readFileSync(filename).toString();
-        return str.split('\n');
+        var temp = str.split('\n');
+        temp.pop();
+        return temp;
     }
     
     module.exports.writeData = writeData;
@@ -325,9 +328,8 @@ We can now modify our previous code:
     var url = require('url');
     var fs = require('fs');
     var hogan = require('hogan.js');
-    var db = require('filedb');
+    var db = require('./filedb');
     var templateFile = fs.readFileSync('posts-1.html').toString();
-    console.log(templateFile);
     var template = hogan.compile(templateFile);
     
     var posts = [];
@@ -367,6 +369,14 @@ We can now modify our previous code:
     });
 
 ### Making Data Persistent with Orchestrate<a id="sec-1-3-6" name="sec-1-3-6"></a>
+
+Files are useful for persistence in a pinch, but there's a number of disadvantages. First off, if the format of your data changes at all then you'll need to rewrite your custom code for storing data in a file and retrieving it. Second, if we want to actually be able to usefully *search* through our data, which our current naive use of files cannot do, then we'll have to add a good bit of code in order to handle this. General databases, on the other hand, can store data in many different kinds of formats equally well and come with pre-built notions of search. This is a Good Thing in general. 
+
+So we'll review our use of the Orchestrate API and corresponding Node library and show how to modify our code to work with that notion of persistence instead.
+
+So first go ahead and run
+
+    npm install orchestrate
 
 ## Our First Express Server<a id="sec-1-4" name="sec-1-4"></a>
 

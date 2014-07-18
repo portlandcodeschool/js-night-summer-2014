@@ -3,9 +3,8 @@ var http = require('http');
 var url = require('url');
 var fs = require('fs');
 var hogan = require('hogan.js');
-var db = require('filedb');
+var db = require('./filedb');
 var templateFile = fs.readFileSync('posts-1.html').toString();
-console.log(templateFile);
 var template = hogan.compile(templateFile);
 
 var posts = [];
