@@ -1,0 +1,11 @@
+{
+  "node": true,
+  "trailing": true,
+  "curly": true,
+  "eqeqeq": true,
+  "undef": true,
+  "unused": true,
+  "forin": true,
+  "devel": true,
+  "browser": true
+}
