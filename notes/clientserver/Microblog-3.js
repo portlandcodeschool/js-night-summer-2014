@@ -3,7 +3,7 @@ var http = require('http');
 var url = require('url');
 var fs = require('fs');
 var hogan = require('hogan.js');
-
+var db = require('./filedb');
 var templateFile = fs.readFileSync('posts-1.html').toString();
 var template = hogan.compile(templateFile);
 
@@ -20,8 +20,9 @@ http.createServer(function (req,res) {
     var method = req.method;
     var urlObj = url.parse(req.url,true);
     var urlPath = urlObj.path.slice(1).split('/')[0];
-
+    
     if(method === "GET" && urlPath===""){
+        posts = db.readData();
         var html = template.render({posts : posts});
         res.writeHead(200,{"Content-Type" : "text/html"});
         res.end(html);
@@ -33,7 +34,7 @@ http.createServer(function (req,res) {
         });
         req.on("end", function () {
             var html ='<a href="/">Go Back</a>'
-            posts.push(extractValue(tempPost));
+            db.writeData(extractValue(tempPost));
             res.writeHead(200,{"Content-Type" : "text/html"});
             res.end(html);
         });

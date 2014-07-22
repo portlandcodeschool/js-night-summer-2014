@@ -16,6 +16,7 @@ We'll more or less follow the progression
 ** Our First Node Server
 Our very first Node server is going to be rather simple: it'll be a kind of "echo" server that will spit back out to the client "You said: message-from-client". This is shockingly simple when it comes to Node and so let's just include the code below:
 
+#+NAME: FirstServer.js
 #+BEGIN_SRC js :exports code :tangle FirstServer.js
   var http = require('http');
 
@@ -42,6 +43,7 @@ Here, we give ~http.createServer~ a single argument: a callback. This callback i
 
 This wasn't the only way we could write this function, though. For example, since ~http.createServer~ returns an /object/ then we could have collapsed a couple of those lines together with "method chaining" and instead said
 
+#+NAME: FirstServer-2.js
 #+BEGIN_SRC js :exports code :tangle FirstServer-2.js
   var http = require('http');
 
@@ -62,6 +64,7 @@ This wasn't the only way we could write this function, though. For example, sinc
 
 We could also simplify things a bit by combining the ~write~ and ~end~ into one step and using method chaining on the ~req~ to assign multiple event handlers at once so then we get
 
+#+NAME: FirstServer-3.js
 #+BEGIN_SRC js :exports code :tangle FirstServer-3.js
   var http = require('http');
 
@@ -80,7 +83,7 @@ We could also simplify things a bit by combining the ~write~ and ~end~ into one 
 
 Beyond that, I'm not sure if there's really good ways to make it simpler without potentially just making it harder to read. 
 
-** A More Complicated Node Server
+** More Complicated Node Servers
 Now let's try building our way up into a more complete server that can handle a small "microblogging" style service, except we'll only be dealing with a single user just to simplify everything at first. 
 *** Handling Requests
 Our first lesson in making a more complicated server is how to deal with proper HTTP requests from the client. To review briefly, there are four major request methods that you'll need to deal with
@@ -92,6 +95,7 @@ Our first lesson in making a more complicated server is how to deal with proper 
 
 in order to handle these request methods in just plain node, we simply need to dispatch over the method of the request. Let's try a simple server to demonstrate this
 
+#+NAME: SimpleMethods.js
 #+BEGIN_SRC js :exports code :tangle SimpleMethods.js
   var http = require('http');
 
@@ -118,9 +122,10 @@ in order to handle these request methods in just plain node, we simply need to d
 #+END_SRC
 
 This is a very simple and perhaps silly example, but this is the basic structure of how we respond to different types of requests.
-
+*** Handling URLs
 The other skill we need to brush up on is how to dispatch over the url of the site, which we can do with using the url library in node in order to parse the url into pieces. The first thing we'll do is just make sure that we handle displaying the posts if we make a get request to the root.
 
+#+NAME: UrlDispatch.js
 #+BEGIN_SRC js :exports code :tangle UrlDispatch.js
   var http = require('http');
   var url = require('url');
@@ -140,10 +145,11 @@ The other skill we need to brush up on is how to dispatch over the url of the si
 #+END_SRC
 
 The actual structure of the object that ~url.parse~ returns is given here: http://nodejs.org/docs/latest/api/url.html The main thing we need to pay attention to here is that the ~.path~ property will give us, as a string, the rest of the url after the actual domain so for example "http://mythingy.io/stuff/thing" then ~.path~ will give us the string "/stuff/thing" and we can thus pop off the first "/" with a ~.slice(1)~ and then break it into an array with ~.split('/')~. 
-
+*** Microblogging: First try
 So let's go ahead and try to take a first stab at our microblogging site. We'll be doing some very, very simple HTML generation that will look awful but hopefully be at least renderable. 
 
 To start with we'll just try to display the result of our GET at the root
+#+NAME: MicroBlog-1.js
 #+BEGIN_SRC js :exports code :tangle MicroBlog-1.js
   var http = require('http');
   var url = require('url');
@@ -172,7 +178,7 @@ To start with we'll just try to display the result of our GET at the root
 #+END_SRC
 
 Go ahead and try running the server and seeing what happens if you navigate to localhost:3000. It should display the simple little html that we've written.
-
+*** Microblogging: Try Two
 Now, let's go ahead and try to write a version of the server that can handle taking in input as well. We'll also, in this case, be using hogan.js in order to do some templating and making this a little bit easier. Note that we'll be using straight-up hogan for templating and /not/ using it as middle-ware because I want to demystify what's happening with these template engines a little bit.
 
 So first before you actually try running anything you'll need to type this in your command line
@@ -187,7 +193,7 @@ So first before you actually try running anything you'll need to type this in yo
 | └──            | nopt@1.0.10           | (abbrev@1.0.5) |
 
 Okay, so first we'll make a hogan template file for displaying posts that will also have a form that will let us add a post and then we'll handle that as well.
-
+#+NAME: posts-1.html
 #+BEGIN_SRC html :exports code :tangle posts-1.html
   <!DOCTYPE html>
   <html lang="en">
@@ -207,6 +213,9 @@ Okay, so first we'll make a hogan template file for displaying posts that will a
   </html>
 #+END_SRC
 
+and now we include it in our main code below
+
+#+NAME: MicroBlog-2.js
 #+BEGIN_SRC js :exports code :tangle MicroBlog-2.js
   var http = require('http');
   var url = require('url');
@@ -214,7 +223,6 @@ Okay, so first we'll make a hogan template file for displaying posts that will a
   var hogan = require('hogan.js');
 
   var templateFile = fs.readFileSync('posts-1.html').toString();
-  console.log(templateFile);
   var template = hogan.compile(templateFile);
 
   var posts = [];
@@ -251,7 +259,6 @@ Okay, so first we'll make a hogan template file for displaying posts that will a
   }).listen(3000, function () {
       console.log("Listening on port 3000\n")
   });
-
 #+END_SRC
 
 This code is a lot longer than our first attempt. Let's try to understand the logic of what's happening here. First off, we've got the dispatch over method and url path that we looked at earlier. So hopefully that's not too weird at this point. Now if we're just loading the main page, then we take the template file we loaded with the ~fs.readFileSync~ and compiled with ~hogan.compile~ and we then /render/ it by passing in the object ~{ posts : posts}~ which turns it into a /string/ that contains the HTML we'll send back to the client. So what's ~{ posts : posts}~ mean? Well, we're telling the template renderer that where we used the variables ~posts~ in the template it should have the values of the variables ~posts~ in our code. Now, these variables don't have to be named the same thing at all but I find it easier to remember if there's a consistency between the names of the variables-in-the-template and the variables-in-the-code. In our template we have a form that will pass along 
@@ -263,22 +270,282 @@ Hopefully this helps explain what's happening in this code so far. To summarize 
   + How to respond to different urls and http method types
   + How to use simple templates and compile them with Hogan.js
   + How to use forms to send data from the client to the server
-
-So you'll notice that we're just sending back simple and completely unformatted HTML. We're going to start talking about client-side scripting, styling, and jQuery now. 
-
 *** Making Data Persistent with Files
+    You'll notice that every time you restart the server that the data you've entered disappears. That's because it isn't /persistent/. In order for the data to last beyond just the single program we need to add some way of storing the data permanently. We'll eventually use databases for this but, to start, we'll just go ahead and use good-ol' files. Since our posts are just a simple list we can do this datastructure very simply.
+
+We'll continue using our template from before and /most/ of the code will be the same. We're going to take the opportunity to review modules though and separate out our interface for the posts into a different file as follows
+
+#+NAME: filedb.js
+#+BEGIN_SRC js :exports code :tangle filedb.js
+  var fs = require('fs');
+
+  var filename = "posts.dat"
+
+  function writeData (newPost) {
+      fs.appendFileSync(filename,newPost+'\n');
+  }
+
+  function readData (){
+      var str = fs.readFileSync(filename).toString();
+      var temp = str.split('\n');
+      temp.pop();
+      return temp;
+  }
+
+  module.exports.writeData = writeData;
+  module.exports.readData = readData;
+#+END_SRC
+
+We can now modify our previous code:
+
+#+NAME: Microblog-3.js
+#+BEGIN_SRC js :exports code :tangle Microblog-3.js
+  var http = require('http');
+  var url = require('url');
+  var fs = require('fs');
+  var hogan = require('hogan.js');
+  var db = require('./filedb');
+  var templateFile = fs.readFileSync('posts-1.html').toString();
+  var template = hogan.compile(templateFile);
+
+  var posts = [];
+
+  function extractValue(str){
+      // this function is for splitting the data returned by a form
+      // we need to split it across the = sign
+      var index = str.indexOf('=');
+      return str.slice(index+1);
+  }
+
+  http.createServer(function (req,res) {
+      var method = req.method;
+      var urlObj = url.parse(req.url,true);
+      var urlPath = urlObj.path.slice(1).split('/')[0];
+      
+      if(method === "GET" && urlPath===""){
+          posts = db.readData();
+          var html = template.render({posts : posts});
+          res.writeHead(200,{"Content-Type" : "text/html"});
+          res.end(html);
+      }
+      else if (method === "POST" && urlPath ==="addpost") {
+          var tempPost = "";
+          req.on("data", function (chunk) {
+              tempPost = tempPost + chunk.toString();
+          });
+          req.on("end", function () {
+              var html ='<a href="/">Go Back</a>'
+              db.writeData(extractValue(tempPost));
+              res.writeHead(200,{"Content-Type" : "text/html"});
+              res.end(html);
+          });
+      }
+  }).listen(3000, function () {
+      console.log("Listening on port 3000\n")
+  });
+#+END_SRC
+
 *** Making Data Persistent with Orchestrate
+Files are useful for persistence in a pinch, but there's a number of disadvantages. First off, if the format of your data changes at all then you'll need to rewrite your custom code for storing data in a file and retrieving it. Second, if we want to actually be able to usefully /search/ through our data, which our current naive use of files cannot do, then we'll have to add a good bit of code in order to handle this. General databases, on the other hand, can store data in many different kinds of formats equally well and come with pre-built notions of search. This is a Good Thing in general. 
+
+So we'll review our use of the Orchestrate API and corresponding Node library and show how to modify our code to work with that notion of persistence instead.
+
+So first go ahead and run
+
+#+BEGIN_SRC sh :exports code
+  npm install orchestrate
+#+END_SRC
+
+#+RESULTS:
+| orchestrate@0.2.0 | node_modules/orchestrate |                             |                      |                 |           |                     |                   |                   |                  |              |                        |             |                  |
+| ├──               | kew@0.2.2                |                             |                      |                 |           |                     |                   |                   |                  |              |                        |             |                  |
+| ├──               | parse-link-header@0.1.0  | (xtend@2.0.6)               |                      |                 |           |                     |                   |                   |                  |              |                        |             |                  |
+| └──               | request@2.27.0           | (json-stringify-safe@5.0.0, | forever-agent@0.5.2, | aws-sign@0.3.0, | qs@0.6.6, | tunnel-agent@0.3.0, | oauth-sign@0.3.0, | cookie-jar@0.3.0, | node-uuid@1.4.1, | mime@1.2.11, | http-signature@0.10.0, | hawk@1.0.0, | form-data@0.1.4) |
+
+Then make a new Orchestrate application through the dashboard. Mine is going to be named "clarissa-tutorial", and it's reasonable to follow the convention when naming yours, although you can name it anything you want up-to-and-including "a-cat-named-princess-ozma-fuzzy-butt" because let's be honest with ourselves that is an amazing name for a cat though a bit wordy for an application name.
+
+We'll still keep the same template file, but we need to add a new file called =config.js= in which we'll keep our api key for our Orchestrate database.
+
+#+BEGIN_SRC js :exports code 
+  module.exports = [YOUR KEY HERE]
+#+END_SRC
+
+#+BEGIN_SRC js :exports code :tangle MicroBlog-4.js
+  var http = require('http');
+  var url = require('url');
+  var fs = require('fs');
+  var hogan = require('hogan.js');
+  // loading our API key from our config file
+  var apiKey = require('./config');
+
+  // loading our connection to 
+  var db = require('orchestrate')(apiKey);
+
+  var templateFile = fs.readFileSync('posts-1.html').toString();
+  var template = hogan.compile(templateFile);
+
+  var posts = [];
+
+  function extractValue(str){
+      // this function is for splitting the data returned by a form
+      // we need to split it across the = sign
+      var index = str.indexOf('=');
+      return str.slice(index+1);
+  }
+
+  http.createServer(function (req,res) {
+      var method = req.method;
+      var urlObj = url.parse(req.url,true);
+      var urlPath = urlObj.path.slice(1).split('/')[0];
+      
+      if(method === "GET" && urlPath===""){
+          db.list('posts').then(function (results) {
+              var prePosts = results.body.results;
+              posts = prePosts.map(function (p) {
+                  return p.value.text;
+              });
+              var html = template.render({posts : posts});
+              res.writeHead(200,{"Content-Type" : "text/html"});
+              res.end(html);
+          }).fail(function (err) {
+              console.log(err);
+              res.end(err);
+          });
+      }
+      else if (method === "POST" && urlPath ==="addpost") {
+          var tempPost = "";
+          req.on("data", function (chunk) {
+              tempPost = tempPost + chunk.toString();
+          });
+          req.on("end", function () {
+              var html ='<a href="/">Go Back</a>';
+              var newKey = posts.length;
+              db.put('posts',newKey.toString(), 
+                     { "text" : extractValue(tempPost)}).then( function (r) {
+                         res.writeHead(200,{"Content-Type" : "text/html"});
+                         res.end(html);
+                     });
+          });
+      }
+  }).listen(3000, function () {
+      console.log("Listening on port 3000\n")
+  });
+
+#+END_SRC
+
+Before we move on to talking about using Express to make simpler servers let's talk about how we've had to change our code to work with Orchestrate. First off, we need to require Orchestrate with ~require('orchestrate')~ but then, strangely, we do this thing where we /apply/ it to our API key immediately? I know this has confused some people so let's just explain with the following code sample
+
+#+BEGIN_SRC js :exports code :results output
+  function myPlus(a){
+      return function (b) {
+          return a+b;
+      };
+  }
+
+  console.log(myPlus(1)(1)); //should equal 2
+#+END_SRC
+
+In other words, if we have functions that return other functions then we can pass the arguments one at a time in order to compute the final result. In our example, we can write a version of ~+~ that takes its two arguments one at a time. In formal terms, this is called "currying" named after Haskell Curry, but that's a digression for another time. So when we have the line ~require('orchestrate')(apiKey)~ it means that the ~module.exports~ that orchestrate returns is a /function/ that eats the API key and gives us the connection to the database.
+
+Rather than using our ~readData~ and ~writeData~ functions that we wrote ourselves for our file based persistence we instead use the built in Orchestrate functions ~.list~ and ~.put~. These functions have fairly simple signatures. ~.list~ takes the name of a collection and then, well actually that's the key word now isn't it? It's not terribly useful at all unless we use the promise ~.then~ in order to set an action to take once the data within the collection has been retrieved. In this case, ~.then~ takes a callback which takes the result of the retrieval as its only argument. Orchestrate data is a little more complicated than what our previous data looked like. So when we retrieve that data we need to acces the ~.results~ property to get back an /array/ of Orchestrate data objects, and then we need to extract the /text/ property out of the /value/ object and to do this for each element of the array we use the ~.map~ method that every array comes with.
+
+Similarly when we write the data to the database we need to provide the collection, the key, and the data in a json format object. In this case we just include a single field, ~text~, to the json object. 
 ** Our First Express Server
+So we've done an awful lot now with just basic Node and it's time to move on to doing things The Easier Way by using Express. Let's start with the very basics of an Express server, but we first need a bit of a digression.
 *** An Aside: package.json
-    As we add more complicated functionality to our servers we'll need to add libraries, this means that we'll have our ~package.json~ file that we need to run in our directory before we actually try running our files.
+    As we add more complicated functionality to our servers we'll need to add libraries, this means that we'll have our ~package.json~ file that we need to run in our directory before we actually try running our files. The package.json file we'll be using has the following contents
+
+#+BEGIN_SRC json :exports code :tangle package.json
+  {
+      "name" : "tutorial",
+      "description" : "our fair tutorial",
+      "dependencies" : {
+          "express" : "*",
+          "consolidate" : "*",
+          "morgan" : "*",
+          "orchestrate" : "*",
+          "q" : "*",
+          "body-parser" : "*",
+          "hogan.js" : "*"
+      }
+  }
+#+END_SRC
+
+Now we're using a little bit of bad form here because really we should specify version numbers and not just say "*", which means use the latest version of the dependency, and in general you should pick particular versions or limit the versions somehow. 
+
+Now that we have our package file go ahead and run the following command
+
+#+BEGIN_SRC sh :exports code
+  npm install
+#+END_SRC
+
+#+RESULTS:
+| consolidate@0.10.0 | node_modules/consolidate |                    |                   |                 |
+|                    |                          |                    |                   |                 |
+| q@1.0.1            | node_modules/q           |                    |                   |                 |
+|                    |                          |                    |                   |                 |
+| morgan@1.1.1       | node_modules/morgan      |                    |                   |                 |
+| └──                | bytes@1.0.0              |                    |                   |                 |
+|                    |                          |                    |                   |                 |
+| body-parser@1.4.3  | node_modules/body-parser |                    |                   |                 |
+| ├──                | qs@0.6.6                 |                    |                   |                 |
+| ├──                | media-typer@0.2.0        |                    |                   |                 |
+| ├──                | bytes@1.0.0              |                    |                   |                 |
+| ├──                | raw-body@1.2.2           |                    |                   |                 |
+| ├──                | depd@0.3.0               |                    |                   |                 |
+| ├──                | iconv-lite@0.4.3         |                    |                   |                 |
+| └──                | type-is@1.3.1            | (mime-types@1.0.0) |                   |                 |
+|                    |                          |                    |                   |                 |
+| express@4.6.1      | node_modules/express     |                    |                   |                 |
+| ├──                | merge-descriptors@0.0.2  |                    |                   |                 |
+| ├──                | utils-merge@1.0.0        |                    |                   |                 |
+| ├──                | parseurl@1.1.3           |                    |                   |                 |
+| ├──                | cookie@0.1.2             |                    |                   |                 |
+| ├──                | escape-html@1.0.1        |                    |                   |                 |
+| ├──                | finalhandler@0.0.3       |                    |                   |                 |
+| ├──                | cookie-signature@1.0.4   |                    |                   |                 |
+| ├──                | fresh@0.2.2              |                    |                   |                 |
+| ├──                | range-parser@1.0.0       |                    |                   |                 |
+| ├──                | vary@0.1.0               |                    |                   |                 |
+| ├──                | qs@0.6.6                 |                    |                   |                 |
+| ├──                | media-typer@0.2.0        |                    |                   |                 |
+| ├──                | methods@1.1.0            |                    |                   |                 |
+| ├──                | serve-static@1.3.2       |                    |                   |                 |
+| ├──                | buffer-crc32@0.2.3       |                    |                   |                 |
+| ├──                | depd@0.3.0               |                    |                   |                 |
+| ├──                | path-to-regexp@0.1.3     |                    |                   |                 |
+| ├──                | debug@1.0.3              | (ms@0.6.2)         |                   |                 |
+| ├──                | proxy-addr@1.0.1         | (ipaddr.js@0.1.2)  |                   |                 |
+| ├──                | type-is@1.3.2            | (mime-types@1.0.1) |                   |                 |
+| ├──                | accepts@1.0.7            | (negotiator@0.4.7, | mime-types@1.0.1) |                 |
+| └──                | send@0.6.0               | (ms@0.6.2,         | mime@1.2.11,      | finished@1.2.2) |
+
+*** Our First Express Server For Realzies
+We'll make a super simple echo server like our first basic Node server, but this time with Express to explain the basics of how you /start/ an Express server.
+
+#+BEGIN_SRC js :exports code :tangle Express-Echo.js
+  var express = require('express');
+  var bodyparser = require('body-parser');
+
+  var app = express();
+  app.use(bodyparser.text());
+
+  app.post('/', function (req, res) {
+      res.send(200, req.body);
+  }).listen(3000, function () {
+      console.log("Listening on port 3000\n");
+  });
+#+END_SRC
 
 ** A Microblogging Express Server
 *** Adding a Real Interface: html forms
-** JQuery and the Rise of the Dom
-*** Finding Elements in JQuery
-*** Changing Classes
-*** Event Handling
 ** Microblog Redux
+*** JQuery and the Rise of the Dom
+So you'll notice that we're just sending back simple and completely unformatted HTML. We're going to start talking about client-side scripting, styling, and jQuery now. 
+**** Finding Elements in JQuery
+**** Changing Classes
+**** Event Handling
+
 Now we're going to move away from using html forms the old fashion way with http actions and, instead, rely entirely on javascript code to make our buttons and all that work without forcing any page reloads. 
 *** One Last Thing: History API 
 
