@@ -45,6 +45,7 @@ var TodoInputView = Backbone.View.extend({
     'click #add-todo': 'addTodo'
   },
   addTodo: function () {
+    //  $('#todo-input', )
     var $todoInput = $(this.el).find('#todo-input');
     var $description = $(this.el).find('#description-input');
     console.log('button was clicked');

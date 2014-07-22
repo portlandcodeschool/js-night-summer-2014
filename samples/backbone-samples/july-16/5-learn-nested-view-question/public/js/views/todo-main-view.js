@@ -27,7 +27,7 @@ var TodoMainView = Backbone.View.extend({
     $('#todo-list').html(todoListView.$el);
 
     var todoInputView = new TodoInputView({collection: todos});
-    
+
   }
 
 });
