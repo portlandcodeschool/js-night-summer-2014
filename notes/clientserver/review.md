@@ -22,11 +22,7 @@
 <li><a href="#sec-1-4-2">1.4.2. Our First Express Server For Realzies</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-5">1.5. A Microblogging Express Server</a>
-<ul>
-<li><a href="#sec-1-5-1">1.5.1. Adding a Real Interface: html forms</a></li>
-</ul>
-</li>
+<li><a href="#sec-1-5">1.5. A Microblogging Express Server</a></li>
 <li><a href="#sec-1-6">1.6. Microblog Redux</a>
 <ul>
 <li><a href="#sec-1-6-1">1.6.1. JQuery and the Rise of the Dom</a></li>
@@ -477,7 +473,6 @@ As we add more complicated functionality to our servers we'll need to add librar
             "consolidate" : "*",
             "morgan" : "*",
             "orchestrate" : "*",
-            "q" : "*",
             "body-parser" : "*",
             "hogan.js" : "*"
         }
@@ -491,7 +486,9 @@ Now that we have our package file go ahead and run the following command
 
 ### Our First Express Server For Realzies<a id="sec-1-4-2" name="sec-1-4-2"></a>
 
-We'll make a super simple echo server like our first basic Node server, but this time with Express to explain the basics of how you *start* an Express server.
+We'll make a super simple echo server like our first basic Node server, but this time with Express to explain the basics of how you *start* a basic Express server and access the content of requests. The two libraries we need to require here are the Express library itself and the "body-parser" library. The point of the body-parser library is to get the data sent to the server in a request so we don't have to do the pesky `.on("data",...)` and `.on("end",...)` methods and give a more sequential feel to our code. We can see that this is a very small bit of code to make an echo server. 
+
+First we make an instance of our application by calling `express()`, then we *use* the body-parser that we want. Let's talk a little bit about "use"ing libraries in Express. Anything you set with "use" is a kind of middleware that will be used at appropriate points at Express's running. In this case, the `bodyparser.text()` middleware is going to parse plain text data in the request and attach it to the property `.body` of the request.
 
     var express = require('express');
     var bodyparser = require('body-parser');
@@ -505,9 +502,73 @@ We'll make a super simple echo server like our first basic Node server, but this
         console.log("Listening on port 3000\n");
     });
 
+When testing this, if you're using the REST client app in Chrome that was suggested in class then make sure that the request type is going to be plain text or this won't work at all, you'll just get an empty body.
+
 ## A Microblogging Express Server<a id="sec-1-5" name="sec-1-5"></a>
 
-### Adding a Real Interface: html forms<a id="sec-1-5-1" name="sec-1-5-1"></a>
+Now that we've done a very simple Express server, let's go ahead and try to replicate our previous microblogging server in Express instead.
+
+As a reminder, here's our template:
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <body>
+      <h1>Make Post</h1>
+      <form action="/addpost" method="post">
+        <input name="post" placeholder="Say something" type="text" maxlength="140">
+        <button type="submit">Post</button>
+      </form>
+      <h1>Posts</h1>
+      <ul>
+        {{#posts}}
+        <li>{{.}}</li>
+        {{/posts}}
+      </ul>
+    </body>
+    </html>
+
+    var express = require('express');
+    var bodyparser = require('body-parser');
+    var consolidate = require('consolidate');
+    var apiKey = require('./config');
+    var db = require('orchestrate')(apiKey);
+    
+    var posts = [];
+    
+    var app = express();
+    app.use(bodyparser.urlencoded());
+    
+    app.engine('html', consolidate.hogan);
+    app.set('view engine', 'html');
+    
+    app.set('views', __dirname);
+    
+    app.get('/', function (req, res) {
+        db.list('posts').then(function (results) {
+            var prePosts = results.body.results;
+            posts = prePosts.map(function (p) {
+                return p.value.text;
+            });     
+            res.render('posts-1',{posts : posts});
+        });
+    }).post('/addpost', function (req, res) {
+        var newPost = req.body.post;
+        var newKey = posts.length;
+        var html = '<a href="/">Go Back</a>';
+        var newKey = posts.length;
+        db.put('posts', 
+               newKey.toString(), 
+               { "text" : newPost }).then( function (r) {
+                   res.writeHead(200,{"Content-Type" : "text/html"});
+                   res.end(html);
+               });
+    }).listen(3000, function () {
+        console.log("Listening on port 3000\n");
+    });
+
+There is *a lot* to talk about here, so let's take it slow. First off, we use `bodyparser.urlencoded` this time because by default that's what a form posts. We can then access the `.post` property of the request, retrieve the content of the post, then add it to our database just like before. We also set the template engine we're going to be using via `app.engine('html', consolidate.hogan)`. Now hogan we've seen before, but what's this whole consolidate thing? Consolidate is a library that provides a uniform interface to Express for various template engines. We still have to install hogan separately, though. On the other hand, this means that we can just use the statement `res.render('posts-1',{posts : posts})` in order to load the template `posts-1.html`, feed it the variable `posts` for the `posts` parameter in the template, render it, and then send it over to the client. Neat! We `.set` the parameter 'views' to be the current directory so that it knows where to look for our templates and we also `.set` the view engine so that it knows what file extension to look for, in this case `.html`. 
+
+So why use Express? It might seem like it doesn't buy us *that* much, but that's really only because we're dealing with such a small example. If we were to be considering a much *larger* application, then we'd have a number of GET and POST requests and different URLs and handling everything in terms of a single sequence of if/if-else statements would be pretty abysmal. Express buys us a certain amount of modularity, but it comes with a certain amount of boilerplate as well: things like the `.set` and `.use` statements that we have to do every time. Essentially, a framework such as Express gives us a way to make larger and more complicated applications simpler but at the same time it makes simple applications take more configuration if not more lines of code overall. 
 
 ## Microblog Redux<a id="sec-1-6" name="sec-1-6"></a>
 
