@@ -1,8 +1,6 @@
-// make sure you have installed browserify globally
+// CHALLENGE: make sure you have installed browserify globally
 // npm install -g browserify
-
-// run this in the root of the project before you load anything in the browswer
-// browserify main.js -o bundle.js
+// many of you will instead need:   sudo npm install -g browserify
 
 // CHALLENGE: Go to package.json, and take a look around.
 //            Notice whether or not there are dependencies listed
@@ -13,7 +11,8 @@
 // CHALLENGE: Bring in jQuery as a dependency, using the node-style module importing method
 //            make sure this is assigned to the $ variable
 
-// CHALLENGE: Bring in the function from the double.js file and set it equal to the var doubler
+// CHALLENGE: Bring in the function from the double.js file and 
+//            assign it to a variable called "doubler"
 
 $(function () {
   var promptAnswer = prompt('what number do you want to double?');
@@ -23,8 +22,13 @@ $(function () {
   alert(promptAnswer + " when doubled equals " + doubledPrompt);
 });
 
-// CHALLENGE: go to the terminal and type:   open index.html   
-//            be sure you are typing that in while in the root project directory.
-//            Is everything working? 
 
 // CHALLENGE: Go to index.html and complete the challenge there
+
+// CHALLENGE: go to the terminal and type the following: browserify main.js -o bundle.js
+//            Be sure to do this while within the root project directory
+
+// CHALLENGE: go to the terminal and type:   open index.html   
+//            Be sure you type this command while in the root project directory.
+//            Is everything working? 
+
