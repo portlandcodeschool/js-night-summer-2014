@@ -1,5 +1,5 @@
 // EXERCISE 3
-// now that we have a description property for our todo app, 
+// now that we have a description property for our todo app,
 // lets create a form with two inputs that accepts both properties.
 // be sure you maintain all of the current functionality.
 // the inputs have been provied in the html
@@ -26,17 +26,18 @@ var Router = Backbone.Router.extend({
     this.todoListView.render();
   }
 
-}); 
+});
 
 
 var TodoInputView = Backbone.View.extend({
   el: '.form-group',
   model: todo1,
+  // $('#add-todo').click(addTodo);
   events: {
     'click #add-todo': 'addTodo'
   },
   addTodo: function () {
-    // CHALLENGE: you will add several lines of code in this function 
+    // CHALLENGE: you will add several lines of code in this function
     var $todoInput = $(this.el).find('#todo-input');
     console.log('button was clicked');
     var todoInput = $todoInput.val();
@@ -61,4 +62,4 @@ var TodoListView = Backbone.View.extend({
 $(function () {
   window.app = new Router();
   Backbone.history.start();
-}); 
+});
