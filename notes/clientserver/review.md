@@ -27,6 +27,7 @@
 <ul>
 <li><a href="#sec-1-6-1">1.6.1. Attaching Event Handlers</a></li>
 <li><a href="#sec-1-6-2">1.6.2. Adding Elements in jQuery</a></li>
+<li><a href="#sec-1-6-3">1.6.3. Selecting Multiple Elements</a></li>
 </ul>
 </li>
 </ul>
@@ -59,6 +60,8 @@ We'll more or less follow the progression
 ## Our First Node Server<a id="sec-1-2" name="sec-1-2"></a>
 
 Our very first Node server is going to be rather simple: it'll be a kind of "echo" server that will spit back out to the client "You said: message-from-client". This is shockingly simple when it comes to Node and so let's just include the code below:
+
+filename: FirstServer.js
 
     var http = require('http');
     
@@ -132,6 +135,8 @@ Our first lesson in making a more complicated server is how to deal with proper 
 
 in order to handle these request methods in just plain node, we simply need to dispatch over the method of the request. Let's try a simple server to demonstrate this
 
+filename: SimpleMethods.js
+
     var http = require('http');
     
     http.createServer(function (req,res){
@@ -161,6 +166,8 @@ This is a very simple and perhaps silly example, but this is the basic structure
 
 The other skill we need to brush up on is how to dispatch over the url of the site, which we can do with using the url library in node in order to parse the url into pieces. The first thing we'll do is just make sure that we handle displaying the posts if we make a get request to the root.
 
+filename: UrlDispatch.js
+
     var http = require('http');
     var url = require('url');
     
@@ -184,6 +191,8 @@ The actual structure of the object that `url.parse` returns is given here: <http
 So let's go ahead and try to take a first stab at our microblogging site. We'll be doing some very, very simple HTML generation that will look awful but hopefully be at least renderable. 
 
 To start with we'll just try to display the result of our GET at the root
+
+filename: MicroBlog-1.js
 
     var http = require('http');
     var url = require('url');
@@ -222,6 +231,8 @@ So first before you actually try running anything you'll need to type this in yo
 
 Okay, so first we'll make a hogan template file for displaying posts that will also have a form that will let us add a post and then we'll handle that as well.
 
+filename: posts-1.html
+
     <!DOCTYPE html>
     <html lang="en">
     <body>
@@ -240,6 +251,8 @@ Okay, so first we'll make a hogan template file for displaying posts that will a
     </html>
 
 and now we include it in our main code below
+
+filename: MicroBlog-2.js
 
     var http = require('http');
     var url = require('url');
@@ -301,6 +314,8 @@ You'll notice that every time you restart the server that the data you've entere
 
 We'll continue using our template from before and *most* of the code will be the same. We're going to take the opportunity to review modules though and separate out our interface for the posts into a different file as follows
 
+filename: filedb.js
+
     var fs = require('fs');
     
     var filename = "posts.dat"
@@ -320,6 +335,8 @@ We'll continue using our template from before and *most* of the code will be the
     module.exports.readData = readData;
 
 We can now modify our previous code:
+
+filename: Microblog-3.js
 
     var http = require('http');
     var url = require('url');
@@ -379,7 +396,11 @@ Then make a new Orchestrate application through the dashboard. Mine is going to 
 
 We'll still keep the same template file, but we need to add a new file called `config.js` in which we'll keep our api key for our Orchestrate database.
 
+filename: config.js
+
     module.exports = [YOUR KEY HERE]
+
+filename: MicroBlog-4.js
 
     var http = require('http');
     var url = require('url');
@@ -490,6 +511,8 @@ We'll make a super simple echo server like our first basic Node server, but this
 
 First we make an instance of our application by calling `express()`, then we *use* the body-parser that we want. Let's talk a little bit about "use"ing libraries in Express. Anything you set with "use" is a kind of middleware that will be used at appropriate points at Express's running. In this case, the `bodyparser.text()` middleware is going to parse plain text data in the request and attach it to the property `.body` of the request.
 
+filename: Express-Echo.js
+
     var express = require('express');
     var bodyparser = require('body-parser');
     
@@ -526,6 +549,8 @@ As a reminder, here's our template:
       </ul>
     </body>
     </html>
+
+filename: MicroBlog-5.js
 
     var express = require('express');
     var bodyparser = require('body-parser');
@@ -582,6 +607,8 @@ So we can't really do *anything* interesting until we can do event handling, so 
 
 let's try this
 
+filename: First-jQuery.html
+
     <!DOCTYPE html>
     <html>
       <head>
@@ -606,6 +633,8 @@ Now, we can talk about something a bit more complicated: we'll make a page with 
 -   How to include style inline in our HTML
 -   How to attach an event handler to an element using jQuery
 -   How to add a class to an element using jQuery
+
+filename: jQueryEvent.html
 
     <!DOCTYPE html>
     
@@ -637,4 +666,143 @@ Now, we can talk about something a bit more complicated: we'll make a page with 
 
 So there's a few things we've done here. First, in our script we *select* the `p` tag by using `$("p")`. This is the most basic way we can pick out elements of our DOM in order to manipulate them. We then attach an event handler for the "mouseover" event using the `.on` method, which in its most basic form takes the name of the event you're listening for **as a string** and then a callback that executes whenever the event is triggered. Within the event callback we then say that we will *toggle* the class `.bold` on the `p` element. There are also methods for `.addClass` and `.removeClass`, but in this case we wanted to have the class change every time we moved the mouse over the text.
 
+There are a number of other events we can listen for, listed here <http://api.jquery.com/Types/#Event> on the jQuery documentation. 
+
 ### Adding Elements in jQuery<a id="sec-1-6-2" name="sec-1-6-2"></a>
+
+So we've learned about some basic ways to manipulate the DOM so far, but what about trying to add something to do the DOM? Well let's try having an example where we have a button that listens for an on-click event and every time it is clicked adds an element to an unordered list!
+
+filename: AddElements.html
+
+    <!DOCTYPE html>
+    
+    <html>
+      <head>
+        <title>Adding Elements</title>
+        <script type='text/javascript' src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script>
+          $(function () {
+            $("button").on("click",function () {
+              $("ul").append("<li>Consider yourself brushed</li>");
+            });
+          });
+        </script>
+      </head>
+      <body>
+        <button>Brush Me!</button>
+        <ul>
+        </ul>
+      </body>
+    </html>
+
+So here we use the `.append` method to add new html to our list, this time adding a new list item each time. We could also have done things by *making* the list item first and then attaching it as follows
+
+filename: AddElements-1.html
+
+    <!DOCTYPE html>
+    
+    <html>
+      <head>
+        <title>Adding Elements</title>
+        <script type='text/javascript' src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script>
+          $(function () {
+            $("button").on("click",function () {
+              var item = $("<li>Consider yourself brushed</li>");
+              $("ul").append(item);
+            });
+          });
+        </script>
+      </head>
+      <body>
+        <button>Brush me!</button>
+        <ul>
+        </ul>
+      </body>
+    </html>
+
+### Selecting Multiple Elements<a id="sec-1-6-3" name="sec-1-6-3"></a>
+
+Now we need to talk about how to select more than one element at a time, except it turns out that we've been doing that all along and what we *really* need to learn is how to be precise in asking for elements. As an example consider the following code
+
+filename: Oops.html
+
+    <!DOCTYPE html>
+    
+    <html>
+      <head>
+        <title>Oops</title>
+        <script type='text/javascript' src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script>
+          $(function () {
+            $("button").on("click",function () {
+              $("li").css("font-weight","bold");
+             });
+          });
+        </script>
+      </head>
+      <body>
+        <ul>
+          <li>We want to change this one to bold!</li>
+          <li>We don't want to change this one, though.</li>
+        </ul>
+        <button>Change to bold</button>
+      </body>
+    </html>
+
+Golly-gee-whillikers, so what happened here? Well when we selected `$("li")` we actually got a collection of all of the instances of that tag. This means that we need to be more specific in what we want. One way is to take the larger collection and select out just the first element, as follows
+
+filename: Better.html
+
+    <!DOCTYPE html>
+    
+    <html>
+      <head>
+        <title>Better</title>
+        <script type='text/javascript' src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script>
+          $(function () {
+            $("button").on("click",function () {
+              $("li").first().css("font-weight","bold");
+             });
+          });
+        </script>
+      </head>
+      <body>
+        <ul>
+          <li>We want to change this one to bold!</li>
+          <li>We don't want to change this one, though.</li>
+        </ul>
+        <button>Change to bold</button>
+      </body>
+    </html>
+
+So that's better, right? We can also try different ways of using the traversal functions listed here <http://api.jquery.com/category/traversing/> in order to find the exact element we want. However, this might be a bit more work than we want in general, and there's an easier way to be very specific: we select by class or id.
+
+filename: IdSelect.html
+
+    <!DOCTYPE html>
+    
+    <html>
+      <head>
+        <title>ID Select</title>
+        <script type='text/javascript' src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script>
+          $(function () {
+            $("button").on("click",function () {
+              $("#bold").css("font-weight","bold");
+              $("#timid").css("font-size","10px");
+            });
+          });
+        </script>
+      </head>
+      <body>
+        <ul>
+          <li id="bold">We want to change this one to bold!</li>
+          <li id="timid">This one gets timid and small</li>
+        </ul>
+        <button>Change to bold</button>
+      </body>
+    </html>
+
+So selecting by id just means that we put "#blah" into our selector and we get the only item with that id. We can also select by class by putting ".blah" into our selector instead. We can also combine them together by having a space between them.

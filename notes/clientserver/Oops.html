@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Oops</title>
+    <script type='text/javascript' src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script>
+      $(function () {
+        $("button").on("click",function () {
+          $("li").css("font-weight","bold");
+         });
+      });
+    </script>
+  </head>
+  <body>
+    <ul>
+      <li>We want to change this one to bold!</li>
+      <li>We don't want to change this one, though.</li>
+    </ul>
+    <button>Change to bold</button>
+  </body>
+</html>
