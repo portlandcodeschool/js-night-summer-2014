@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>jQuery Events</title>
+    <script type='text/javascript' src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script>
+      $(function () {
+         $("p").on("mouseover",function () {
+            $(this).toggleClass("bold");
+         });
+      });
+    </script>
+    <style>
+      p {
+        text-align: center;
+      }
+
+      .bold {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <p>This is our text</p>
+  </body>
+</html>

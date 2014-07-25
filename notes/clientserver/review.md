@@ -23,10 +23,10 @@
 </ul>
 </li>
 <li><a href="#sec-1-5">1.5. A Microblogging Express Server</a></li>
-<li><a href="#sec-1-6">1.6. Microblog Redux</a>
+<li><a href="#sec-1-6">1.6. Client Side Scripting: JQuery and the Rise of the Dom</a>
 <ul>
-<li><a href="#sec-1-6-1">1.6.1. JQuery and the Rise of the Dom</a></li>
-<li><a href="#sec-1-6-2">1.6.2. One Last Thing: History API</a></li>
+<li><a href="#sec-1-6-1">1.6.1. Attaching Event Handlers</a></li>
+<li><a href="#sec-1-6-2">1.6.2. Adding Elements in jQuery</a></li>
 </ul>
 </li>
 </ul>
@@ -570,18 +570,71 @@ There is *a lot* to talk about here, so let's take it slow. First off, we use `b
 
 So why use Express? It might seem like it doesn't buy us *that* much, but that's really only because we're dealing with such a small example. If we were to be considering a much *larger* application, then we'd have a number of GET and POST requests and different URLs and handling everything in terms of a single sequence of if/if-else statements would be pretty abysmal. Express buys us a certain amount of modularity, but it comes with a certain amount of boilerplate as well: things like the `.set` and `.use` statements that we have to do every time. Essentially, a framework such as Express gives us a way to make larger and more complicated applications simpler but at the same time it makes simple applications take more configuration if not more lines of code overall. 
 
-## Microblog Redux<a id="sec-1-6" name="sec-1-6"></a>
+## Client Side Scripting: JQuery and the Rise of the Dom<a id="sec-1-6" name="sec-1-6"></a>
 
-### JQuery and the Rise of the Dom<a id="sec-1-6-1" name="sec-1-6-1"></a>
+So you'll notice that we're just sending back simple and completely unformatted HTML. We're going to start talking about client-side scripting, jQuery, and just a little bit of styling but not much.
 
-So you'll notice that we're just sending back simple and completely unformatted HTML. We're going to start talking about client-side scripting, styling, and jQuery now. 
+### Attaching Event Handlers<a id="sec-1-6-1" name="sec-1-6-1"></a>
 
-1.  Finding Elements in JQuery
+So we can't really do *anything* interesting until we can do event handling, so let's first bootstrap ourselves up to being able to access elements. First off, let's just make sure we can do a couple of basic things:
+-   Load up the jQuery library into our HTML
+-   Cause our code to fire after all the HTML
 
-2.  Changing Classes
+let's try this
 
-3.  Event Handling
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>First Test</title>
+        <script type='text/javascript' src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script>
+          $(function () {
+            alert("Initial Test");
+          });
+        </script>
+      </head>  
+      <body>
+        Hope we saw an alert
+      </body>
+    </html>
 
-    Now we're going to move away from using html forms the old fashion way with http actions and, instead, rely entirely on javascript code to make our buttons and all that work without forcing any page reloads. 
+Hopefully you saw the popup when you tried running this code. The main thing we need to point out is that doing `$(function () {...})` is a way of ensuring that our script is only run *after* the entire page has been loaded into the DOM. Why is this necessary? I'm not entirely sure why the default behavior of browsers isn't always to wait until all elements are loaded before running the code, but it's not so we need to use this idiom to make sure that our code runs correctly.
 
-### One Last Thing: History API<a id="sec-1-6-2" name="sec-1-6-2"></a>
+Now, we can talk about something a bit more complicated: we'll make a page with a single `<p>` element that will become bold when we mouse over it. There's a few things we need to introduce in order to do that, though.
+
+-   How to retrieve an element from the DOM using jQuery
+-   How to include style inline in our HTML
+-   How to attach an event handler to an element using jQuery
+-   How to add a class to an element using jQuery
+
+    <!DOCTYPE html>
+    
+    <html>
+      <head>
+        <title>jQuery Events</title>
+        <script type='text/javascript' src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script>
+          $(function () {
+             $("p").on("mouseover",function () {
+                $(this).toggleClass("bold");
+             });
+          });
+        </script>
+        <style>
+          p {
+            text-align: center;
+          }
+    
+          .bold {
+            font-weight: bold;
+          }
+        </style>
+      </head>
+      <body>
+        <p>This is our text</p>
+      </body>
+    </html>
+
+So there's a few things we've done here. First, in our script we *select* the `p` tag by using `$("p")`. This is the most basic way we can pick out elements of our DOM in order to manipulate them. We then attach an event handler for the "mouseover" event using the `.on` method, which in its most basic form takes the name of the event you're listening for **as a string** and then a callback that executes whenever the event is triggered. Within the event callback we then say that we will *toggle* the class `.bold` on the `p` element. There are also methods for `.addClass` and `.removeClass`, but in this case we wanted to have the class change every time we moved the mouse over the text.
+
+### Adding Elements in jQuery<a id="sec-1-6-2" name="sec-1-6-2"></a>
