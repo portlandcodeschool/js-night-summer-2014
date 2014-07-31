@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>ID Select</title>
+    <script type='text/javascript' src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script>
+      $(function () {
+        $("button").on("click",function () {
+          $("#bold").css("font-weight","bold");
+          $("#timid").css("font-size","10px");
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <ul>
+      <li id="bold">We want to change this one to bold!</li>
+      <li id="timid">This one gets timid and small</li>
+    </ul>
+    <button>Change to bold</button>
+  </body>
+</html>

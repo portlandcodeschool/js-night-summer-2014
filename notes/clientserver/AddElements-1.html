@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Adding Elements</title>
+    <script type='text/javascript' src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script>
+      $(function () {
+        $("button").on("click",function () {
+          var item = $("<li>Consider yourself brushed</li>");
+          $("ul").append(item);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <button>Brush me!</button>
+    <ul>
+    </ul>
+  </body>
+</html>

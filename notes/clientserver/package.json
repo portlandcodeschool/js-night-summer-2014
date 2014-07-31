@@ -7,7 +7,6 @@
         "consolidate" : "*",
         "morgan" : "*",
         "orchestrate" : "*",
-        "q" : "*",
         "body-parser" : "*",
         "hogan.js" : "*"
     }
