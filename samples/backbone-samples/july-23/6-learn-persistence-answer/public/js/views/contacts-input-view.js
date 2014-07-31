@@ -25,6 +25,7 @@ var ContactsInputView = Backbone.View.extend({
     // ANSWER #2: pass an options object, with the property validate,
     // with the value true (boolean, defaults to false)
     this.collection.create( collectionFromInput, { validate: true } );
+    // this.collection.add(collectionFromInput);
 
     $firstName.val('');
     $lastName.val('');
