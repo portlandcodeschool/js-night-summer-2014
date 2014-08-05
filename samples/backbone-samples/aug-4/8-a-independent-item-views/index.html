@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Backbone Example</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+
+  <script type="text/javascript" src="js/lib/jquery.js"></script>
+  <script type="text/javascript" src="js/lib/underscore.js"></script>
+  <script type="text/javascript" src="js/lib/backbone.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+
+</head>
+<body>
+<h1>Simple Backbone Example</h1>
+
+<body class="container-fluid col-xs-6">
+  <h2>Add a Todo</h2>
+  <div class="form-group">
+    <label for="todo-input">Todo Title</label>
+    <input id="todo-input" class="form-control" type="text">
+    <br>
+
+    <label for="description-input">Todo Description</label>
+    <input id="description-input" class="form-control" type="text">
+
+
+    <button id="add-todo" class="btn btn-success">Add todo</button>
+  </div>
+  <br><br>
+  <h3>My Todos</h3>
+  <ol class="list-group" id="todo-list">
+  </ol>
+</body>
+
+</html>
