@@ -1,0 +1,134 @@
+In this file we'll be covering a number of small Backbone examples to illustrate concepts
+* First Application
+Here we'll include just a small application that will essentially just server up some basic HTML but it will use Backbone routing and views in order to do that.
+
+Now our first application will simply start an express server which will server up the index.html file and after /that/ we'll let Backbone take care of the rest. So here's our express server.
+
+filename: FirstBackbone.js
+#+BEGIN_SRC js :exports code :tangle FirstBackbone.js
+  var express = require('express');
+
+  var app = express();
+  app.use(express.static(__dirname));
+
+  app.get('/', function (req, res) {
+      res.sendfile('./index-1.html');
+  });
+
+  app.listen(3000, function () {
+      console.log('Express server listening on port 3000');
+  });
+#+END_SRC
+
+and then our index-1.html is going to look like
+#+BEGIN_SRC html :exports code :tangle index-1.html
+  <!doctype html>
+  <html>
+    <head>
+      <title>First Example</title>
+      <script type="text/javascript" src="js/jquery.js"></script>
+      <script type="text/javascript" src="js/underscore.js"></script>
+      <script type="text/javascript" src="js/backbone.js"></script>
+      <script type="text/javascript" src="main-1.js"></script>
+    </head>
+  <body>
+    <h1>This Is Our Thing</h1>
+  </body>
+  </html>
+#+END_SRC
+and our main-1.js looks like
+#+BEGIN_SRC js :exports code :tangle main-1.js
+  var Router = Backbone.Router.extend({
+      routes: {
+          '': 'home'
+          },
+      home: function () {
+          this.homeView = new HomeView();
+          this.homeView.render();
+      }
+  });
+
+  var HomeView = Backbone.View.extend({
+      el: 'body',
+      render: function () {
+          $(this.el).html("<p>OMIGOSH IT'S A THING</p>");
+      }
+  });
+
+  $(function () {
+     window.app = new Router();
+     Backbone.history.start();
+  });
+#+END_SRC
+
+So what we have here is a pretty bare-bones example of using Backbone with an Express server.
+
+One necessary component of the Express side is that you /need/ to specify that the server can pass along all of the static resources that are needed, which can include both css, other HTML files, and javascript but the one of these that matters for the purposes of this example is the set of javascript files that we need to pass along with the client side code. To this end, we have the ~app.use(express.static(__dirname))~ statement in line 4 of the our source. If you forget this, like I did when trying to make as small of an example as I could, then nothing will work right and it will, unfortunately, fail silently unless you check the browser console. 
+
+So! That being said, we could actually potentially make our example even smaller if we don't bother having a server pass along the file. In this case, we can actually just navigate to our index-1.html as a local file and everything will still load anyway.
+* Slightly Harder Applications
+  Now let's try having a slightly more complicated application, one that will allow actually have a notion of models and views. To start, let's try just keeping a counter and a button that will increment the counter. This code will be /entirely/ client side for simplicity.
+
+filename: index-2.html
+#+BEGIN_SRC html :exports code :tangle index-2.html
+  <!doctype html>
+  <html>
+    <head>
+      <title>Counter Example</title>
+      <script type="text/javascript" src="js/jquery.js"></script>
+      <script type="text/javascript" src="js/underscore.js"></script>
+      <script type="text/javascript" src="js/backbone.js"></script>
+      <script type="text/javascript" src="main-2.js"></script>
+    </head>
+  <body>
+    <div></div>
+    <button>Increment</button>
+  </body>
+  </html>
+#+END_SRC
+
+filename: main-2.js
+#+BEGIN_SRC js -n -r :exports code :tangle main-2.js
+  var CounterModel = Backbone.Model.extend({
+      defaults: {
+          counter: 0
+      }
+  });
+
+  var CounterView = Backbone.View.extend({
+      el: 'div',
+      render: function () {
+          $(this.el).html("<p>" + this.model.get("counter") + "</p>");
+      },
+      initialize: function () {
+          this.model.on('change',this.render,this);
+          var model = this.model;
+          $("button").on("click", function () {
+              var num = model.get("counter");
+              model.set("counter",num+1);
+          });
+      }
+  });
+
+  var Router = Backbone.Router.extend({
+      routes: {
+          '': 'home'
+          },
+      home: function () {
+          var counter = new CounterModel();
+          var counterView = new CounterView({model : counter});
+          counterView.render();
+      }
+  });
+
+  $(function () {
+      window.app = new Router();
+      Backbone.history.start();
+  })
+#+END_SRC
+
+Here we make a very simple model and view for a simple counter. The basic pattern at work here is pretty basic /once you know it/ but it can be a bit intimidating at first. 
+
+First off, our basic HTML has a single button and a div that we're going to attach our dynamically generated data to. Then right in the first line we define our model by calling the ~.extend~ method of ~Backbone.Model~ and from there we set the ~counter~ property to be 0 by default. An easy mistake to make is that this means when a new ~CounterModel~ is created that there will be an ordinary javascript property named ~counter~ that you can access but /this is not so/, we instead get a special Backbone property that can be accessed only by the ~.set~ method.
+
+
