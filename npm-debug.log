@@ -1,0 +1,77 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', '-g', 'node@0.10.30' ]
+2 info using npm@1.4.23
+3 info using node@v0.10.26
+4 verbose cache add [ 'node@0.10.30', null ]
+5 verbose cache add name=undefined spec="node@0.10.30" args=["node@0.10.30",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'node@0.10.30',
+6 verbose parsed url   path: 'node@0.10.30',
+6 verbose parsed url   href: 'node@0.10.30' }
+7 verbose cache add name="node" spec="0.10.30" args=["node","0.10.30"]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: '0.10.30',
+8 verbose parsed url   path: '0.10.30',
+8 verbose parsed url   href: '0.10.30' }
+9 verbose addNamed [ 'node', '0.10.30' ]
+10 verbose addNamed [ '0.10.30', '0.10.30' ]
+11 silly lockFile a2025b2a-node-0-10-30 node@0.10.30
+12 verbose lock node@0.10.30 /Users/verble/.npm/a2025b2a-node-0-10-30.lock
+13 verbose request where is /node
+14 verbose request registry https://registry.npmjs.org/
+15 verbose request id 6258fc231f992791
+16 verbose url raw /node
+17 verbose url resolving [ 'https://registry.npmjs.org/', './node' ]
+18 verbose url resolved https://registry.npmjs.org/node
+19 verbose request where is https://registry.npmjs.org/node
+20 info trying registry request attempt 1 at 18:55:15
+21 verbose etag "6017ZTV3MUYT5RMTLD114K7YA"
+22 http GET https://registry.npmjs.org/node
+23 http 304 https://registry.npmjs.org/node
+24 silly registry.get cb [ 304,
+24 silly registry.get   { date: 'Tue, 05 Aug 2014 01:55:15 GMT',
+24 silly registry.get     server: 'Apache',
+24 silly registry.get     via: '1.1 varnish',
+24 silly registry.get     'last-modified': 'Tue, 05 Aug 2014 01:55:15 GMT',
+24 silly registry.get     'cache-control': 'max-age=60',
+24 silly registry.get     etag: '"6017ZTV3MUYT5RMTLD114K7YA"',
+24 silly registry.get     'x-served-by': 'cache-sjc3122-SJC',
+24 silly registry.get     'x-cache': 'MISS',
+24 silly registry.get     'x-cache-hits': '0',
+24 silly registry.get     'x-timer': 'S1407203715.896765,VS0,VE39',
+24 silly registry.get     vary: 'Accept',
+24 silly registry.get     'content-length': '0',
+24 silly registry.get     'keep-alive': 'timeout=10, max=50',
+24 silly registry.get     connection: 'Keep-Alive' } ]
+25 verbose etag https://registry.npmjs.org/node from cache
+26 silly lockFile a2025b2a-node-0-10-30 node@0.10.30
+27 silly lockFile a2025b2a-node-0-10-30 node@0.10.30
+28 error Error: version not found: node@0.10.30
+28 error     at /usr/local/lib/node_modules/npm/lib/cache/add-named.js:125:12
+28 error     at saved (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/get.js:167:7)
+28 error     at Object.oncomplete (fs.js:107:15)
+29 error If you need help, you may report this *entire* log,
+29 error including the npm and node versions, at:
+29 error     <http://github.com/npm/npm/issues>
+30 error System Darwin 13.3.0
+31 error command "node" "/usr/local/bin/npm" "install" "-g" "node@0.10.30"
+32 error cwd /Users/verble/pcs/js-night-summer-2014
+33 error node -v v0.10.26
+34 error npm -v 1.4.23
+35 verbose exit [ 1, true ]
