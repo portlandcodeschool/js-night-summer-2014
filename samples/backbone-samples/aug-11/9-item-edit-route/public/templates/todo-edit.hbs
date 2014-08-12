@@ -1,0 +1,17 @@
+<h2>Edit Todo: {{title}}</h2>
+<div class="form-group">
+  <label for="title-input">Todo Title</label>
+  <input id="title-input" value="{{title}}"class="form-control" type="text">
+  <br>
+  <label for="description-input">Todo Description</label>
+  <input id="description-input" value="{{description}}" class="form-control" type="text">
+  <br>
+  <button id="save-todo" class="btn btn-success">Save todo</button>
+  <br>
+</div>
+<div id="item-display">
+  <div class="list-group-item">
+    <h4 id="list-title" class="list-group-item-heading">{{title}}</h4>
+    <p id="list-description" class="list-group-item-text">{{description}}</p>
+  </div>
+</div>

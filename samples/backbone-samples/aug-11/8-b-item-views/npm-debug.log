@@ -1,0 +1,26 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'run', 'wfy' ]
+2 info using npm@1.4.21
+3 info using node@v0.10.30
+4 verbose run-script [ 'prewfy', 'wfy', 'postwfy' ]
+5 info prewfy backbone-example-7@0.0.0
+6 info wfy backbone-example-7@0.0.0
+7 verbose unsafe-perm in lifecycle true
+8 info backbone-example-7@0.0.0 Failed to exec wfy script
+9 error backbone-example-7@0.0.0 wfy: `watchify public/js/main.js -o public/js/bundle.js -v -t hbsfy -t es6-browserify`
+9 error Exit status 8
+10 error Failed at the backbone-example-7@0.0.0 wfy script.
+10 error This is most likely a problem with the backbone-example-7 package,
+10 error not with npm itself.
+10 error Tell the author that this fails on your system:
+10 error     watchify public/js/main.js -o public/js/bundle.js -v -t hbsfy -t es6-browserify
+10 error You can get their info via:
+10 error     npm owner ls backbone-example-7
+10 error There is likely additional logging output above.
+11 error System Darwin 13.3.0
+12 error command "node" "/usr/local/bin/npm" "run" "wfy"
+13 error cwd /Users/verble/pcs/js-night/backbone-lessons/8-b-item-views
+14 error node -v v0.10.30
+15 error npm -v 1.4.21
+16 error code ELIFECYCLE
+17 verbose exit [ 1, true ]
