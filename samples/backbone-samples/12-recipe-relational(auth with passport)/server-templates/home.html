@@ -1,0 +1,34 @@
+{{>header}}
+<!-- views/home.handlebars -->
+{{#if user}}
+  <div class="row">
+    <div class="col-xs-12 col-sm-3">
+        <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">Profile Information</h3>
+        </div>
+        <div class="panel-body">
+          <p>Username: {{user.username}}</p>
+          <p>Avatar: <img class="img-responsive" src="{{user.avatar}}"/></p>
+        </div>
+      </div>
+    </div>
+    <section class="container-fluid col-xs-12 col-sm-9">
+      <div class="panel panel-primary" id="my-app"></div>
+    </section>
+  </div>
+
+  
+{{else}}
+  <div class="jumbotron">
+    <h1>Recipe Manager</h1>
+    <p>
+      <a href="/signin" class="btn btn-primary btn-lg" role="button">
+        <span class="glyphicon glyphicon-user"></span> 
+        Sign in
+      </a>
+    </p>
+  </div>
+  
+{{/if}}
+{{>footer}}
