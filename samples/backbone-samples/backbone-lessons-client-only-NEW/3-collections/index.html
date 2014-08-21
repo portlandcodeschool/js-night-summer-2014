@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Backbone Example</title>
+  <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css">
+  <link rel="stylesheet" href="css/pure.css">
+  <link rel="stylesheet" href="css/grids-responsive.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <script type="text/javascript" src="js/lib/jquery.js"></script>
+  <script type="text/javascript" src="js/lib/underscore.js"></script>
+  <script type="text/javascript" src="js/lib/backbone.js"></script>
+  <script type="text/javascript" src="js/main-answer.js"></script>
+
+</head>
+<body class="pure-g">
+  <div id="my-app" class="pure-u-7-8 pure-u-sm-3-4 pure-u-md-1-2 pure-u-lg-2-5">
+    <h1><i class="fa fa-check-square-o"></i> Todos</h1>
+    <form class="pure-form pure-form-stacked" id="todo-form">
+      <fieldset>
+        <div class="pure-control-group">
+          <label for="todo-input">Todo Title</label>
+          <input id="todo-input" class="form-control" type="text">
+        </div>
+
+      <!-- Hint, hint ;-) -->
+        <div class="pure-control-group">
+          <label for="description-input">Todo Description</label>
+          <input id="description-input" class="form-control" type="text">                   
+        </div>
+        
+        <div class="pure-controls">
+          <button id="add-todo" class="pure-button">Add todo</button>
+        </div>
+       </fieldset>
+
+    </form>
+    <br><br>
+    <h3>My Todos</h3>
+    <ol id="todo-list">
+    </ol>
+  </div>
+<body>
+  
+</body>
+</html>
